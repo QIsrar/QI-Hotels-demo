@@ -1,0 +1,389 @@
+@import "tailwindcss";
+
+/* ── Google Fonts (preconnected in layout.tsx <head>) ─────── */
+/* Fonts are loaded via <link rel="preconnect"> + stylesheet in layout */
+
+/* ── CSS Custom Properties (Brand Tokens) ────────────────── */
+:root {
+  --color-primary: #2D5016;
+  --color-primary-light: #3d6b1f;
+  --color-primary-dark: #1e3810;
+  --color-accent: #C8902A;
+  --color-accent-light: #d9a43e;
+  --color-accent-dark: #a87420;
+  --color-bg: #FAF7F2;
+  --color-bg-card: #FFFFFF;
+  --color-text: #1A1A1A;
+  --color-text-muted: #6B7280;
+  --color-border: #E8E0D5;
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.10);
+  --shadow-hover: 0 16px 56px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Base Reset & Defaults ───────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+/* ── Custom Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ── Selection Color ─────────────────────────────────────── */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* ── Focus Ring ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Utility Classes ─────────────────────────────────────── */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+.container-tight {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-tight {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.15;
+}
+
+.section-subheading {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ── WhatsApp Floating Button Pulse ──────────────────────── */
+@keyframes wa-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+
+.wa-pulse {
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Card Hover Lift ─────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ── Gradient Overlays ───────────────────────────────────── */
+.hero-overlay {
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.40) 60%,
+      rgba(0, 0, 0, 0.70) 100%);
+}
+
+/* ── Glassmorphism Navbar ────────────────────────────────── */
+.glass-nav {
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid rgba(200, 144, 42, 0.15);
+}
+
+/* ── Button Styles ───────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: var(--color-accent);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(200, 144, 42, 0.35);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200, 144, 42, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.75rem;
+  background-color: transparent;
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 50px;
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* ── Star Rating ─────────────────────────────────────────── */
+.star-filled {
+  color: #F59E0B;
+}
+
+.star-empty {
+  color: #D1D5DB;
+}
+
+/* ── Decorative Divider ──────────────────────────────────── */
+.divider-accent {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, var(--color-accent), var(--color-accent-light));
+  border-radius: 2px;
+}
+
+/* ── Accordion ───────────────────────────────────────────── */
+.accordion-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.accordion-trigger:hover {
+  color: var(--color-primary);
+}
+
+/* ── Testimonial Card ────────────────────────────────────── */
+.testimonial-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Amenity Icon Card ───────────────────────────────────── */
+.amenity-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.amenity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-accent);
+}
+
+/* ── Room Card ───────────────────────────────────────────── */
+.room-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.room-card.featured {
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 8px 40px rgba(200, 144, 42, 0.2);
+}
+
+/* ── Attraction Card ─────────────────────────────────────── */
+.attraction-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: white;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attraction-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ── Travel Time Badge ───────────────────────────────────── */
+.travel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  background: rgba(200, 144, 42, 0.12);
+  color: var(--color-accent-dark);
+  border: 1px solid rgba(200, 144, 42, 0.3);
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* ── Line Clamp ──────────────────────────────────────────── */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Responsive Helpers ──────────────────────────────────── */
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+}
