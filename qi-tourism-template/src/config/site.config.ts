@@ -69,7 +69,7 @@ export const siteConfig = {
       "Our host philosophy is rooted in Pakistani tradition — warm hospitality, home-cooked meals made from locally sourced ingredients, and the belief that every guest is family. From the moment you arrive, we want you to exhale.",
       "Whether you're a solo traveller seeking solitude in the pines, a couple celebrating a milestone, or a family creating memories — Pine Crest Retreat is your home in the mountains.",
     ],
-    imagePath: "/images/about.png",
+    imagePath: "/images/about.jpg",
     imageAlt: "Warm interior of Pine Crest Retreat with a stone fireplace",
     highlights: [
       { icon: "mountain", label: "1,200m Elevation" },
@@ -122,7 +122,7 @@ export const siteConfig = {
         "Ideal for friends or family travelling together. Two comfortable single beds, mountain forest views, and all essential amenities included.",
       price: "PKR 8,000",
       priceNote: "per night",
-      imagePath: "/images/room-standard.png",
+      imagePath: "/images/room-standard.jpg",
       altText: "Cozy standard twin room with two single beds and mountain forest window view",
       amenities: ["Twin Beds", "Hot Water", "Wi-Fi", "Heating", "Mountain View"],
       featured: false,
@@ -134,7 +134,7 @@ export const siteConfig = {
         "Our signature room — a king-sized bed, panoramic pine forest views through floor-to-ceiling windows, and a curated welcome basket on arrival.",
       price: "PKR 14,000",
       priceNote: "per night",
-      imagePath: "/images/room-deluxe.png",
+      imagePath: "/images/room-deluxe.jpg",
       altText: "Spacious deluxe king suite with panoramic mountain and pine forest views",
       amenities: ["King Bed", "Hot Water", "Wi-Fi", "Heating", "Panoramic View", "Welcome Basket"],
       featured: true,
@@ -146,7 +146,7 @@ export const siteConfig = {
         "A private sanctuary for couples. Canopy bed, stone accent walls, private balcony overlooking the valley, and bespoke romantic décor on request.",
       price: "PKR 22,000",
       priceNote: "per night",
-      imagePath: "/images/room-suite.png",
+      imagePath: "/images/room-suite.jpg",
       altText: "Romantic honeymoon suite with canopy bed, stone walls and private mountain balcony",
       amenities: ["Canopy Bed", "Private Balcony", "Hot Tub", "Wi-Fi", "Valley View", "Romantic Setup"],
       featured: false,
@@ -160,7 +160,7 @@ export const siteConfig = {
       description:
         "A charming colonial hill station perched in the clouds. Walk the famous Governor's Trail through ancient pine forests and breathe the freshest air in Pakistan.",
       travelTime: "45 mins away",
-      imagePath: "/images/attraction-nathia.png",
+      imagePath: "/images/attraction-nathia.jpg",
       altText: "Sunlit pine forest trail in Nathia Gali hill station",
     },
     {
@@ -168,7 +168,7 @@ export const siteConfig = {
       description:
         "The highest point in Abbottabad district at 2,750m. On a clear day, you can see all the way to Nanga Parbat. A favourite for sunrise trekkers.",
       travelTime: "1 hr away",
-      imagePath: "/images/attraction-thandiani.png",
+      imagePath: "/images/attraction-thandiani.jpg",
       altText: "Panoramic mountain view from Thandiani peak at golden hour",
     },
     {
@@ -176,7 +176,7 @@ export const siteConfig = {
       description:
         "Explore the charming garrison city — its bustling bazaars, fresh fruit markets, Ayub Medical Complex, and the iconic Jinnah Abbottabad Mall.",
       travelTime: "20 mins away",
-      imagePath: "/images/attraction-abbottabad.png",
+      imagePath: "/images/attraction-abbottabad.jpg",
       altText: "Green valley view of Abbottabad city surrounded by mountains",
     },
     {
@@ -184,7 +184,7 @@ export const siteConfig = {
       description:
         "A serene forest village with some of the most beautiful walking trails in KPK. Famous for its rhododendron blooms in spring and snowfall in winter.",
       travelTime: "40 mins away",
-      imagePath: "/images/attraction-nathia.png",
+      imagePath: "/images/attraction-nathia.jpg",
       altText: "Peaceful forest village of Dunga Gali with mountain trails",
     },
   ],
@@ -262,11 +262,11 @@ export const siteConfig = {
 
   // ── SEO & Open Graph ──────────────────────────────────────
   seo: {
-    title: "Pine Crest Retreat | Luxury Mountain Stay — Abbottabad, Pakistan",
+    title: "Pine Crest Retreat | Luxury Mountain Getaway in Abbottabad",
     description:
-      "Book a luxury boutique mountain retreat in Abbottabad. Stunning Himalayan views, home-cooked meals, 24/7 power backup & Wi-Fi. From PKR 8,000/night. Book via WhatsApp.",
-    ogImage: "/images/hero.png",
-    siteUrl: "https://pinecrestretreat.com",  // Update after Vercel deployment
+      "Escape to Pine Crest Retreat. Experience premium hospitality, 24/7 power backup, and breathtaking Himalayan views.",
+    siteUrl: "https://your-new-domain.vercel.app", // Put your actual new Vercel link here!
+    ogImage: "https://your-new-domain.vercel.app/og-image.png", // Must be the FULL link!
     keywords:
       "abbottabad hotel, mountain retreat pakistan, nathia gali hotel, kpk tourism, luxury guesthouse abbottabad, pine crest retreat",
   },

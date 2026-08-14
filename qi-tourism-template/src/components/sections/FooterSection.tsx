@@ -71,7 +71,7 @@ export default function FooterSection() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold text-base px-8 py-4 rounded-full shadow-2xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-green-900/30"
+            className="inline-flex items-center justify-center whitespace-nowrap box-border w-max gap-2.5 bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold text-base px-8 py-4 rounded-full shadow-2xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-green-900/30"
           >
             <WhatsAppIcon className="w-5 h-5" />
             WhatsApp Us Now
@@ -220,7 +220,7 @@ export default function FooterSection() {
               href="https://www.linkedin.com/company/qi-tyrix"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-3 px-6 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center whitespace-nowrap box-border w-max mt-3 px-8 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105"
               style={{
                 border: "1px solid rgba(234, 179, 8, 0.4)",
                 background: "rgba(255, 255, 255, 0.06)",
@@ -230,6 +230,7 @@ export default function FooterSection() {
                 letterSpacing: "0.06em",
                 boxShadow: "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
                 textShadow: "0 0 12px rgba(234, 179, 8, 0.15)",
+                boxSizing: "border-box"
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget;
@@ -245,7 +246,8 @@ export default function FooterSection() {
               }}
               aria-label="Visit QI Tyrix on LinkedIn"
             >
-              Developed by <span className="font-bold">QI Tyrix</span>
+              Developed by{" "}
+              <span className="font-bold">QI Tyrix</span>
             </a>
           </div>
         </div>

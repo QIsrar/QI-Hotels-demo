@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/config/site.config";
 
 /* ── Open Graph / SEO Metadata ───────────────────────────── */
+import Popup from "@/components/ui/Popup";
 export const metadata: Metadata = {
   title: siteConfig.seo.title,
   description: siteConfig.seo.description,
@@ -96,6 +97,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <Popup />
         {/* Vercel Analytics — no-ops in local dev, active on Vercel */}
         <Analytics />
       </body>

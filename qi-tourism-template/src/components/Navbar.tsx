@@ -67,28 +67,20 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <Link
-          href={waUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 btn-primary text-sm py-2.5 px-5"
-        >
-          <WhatsAppIcon className="w-4 h-4" />
-          Book Now
-        </Link>
-
-        {/* Mobile hamburger */}
-        <button
-          className={`md:hidden p-2 rounded-md transition-colors ${
-            scrolled ? "text-[var(--color-text)]" : "text-white"
-          }`}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-expanded={mobileOpen}
-          aria-label="Toggle mobile menu"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Header Actions (Desktop + Mobile) */}
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* Mobile hamburger */}
+          <button
+            className={`md:hidden p-1.5 rounded-md transition-colors ${
+              scrolled ? "text-[var(--color-text)]" : "text-white"
+            }`}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label="Toggle mobile menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile drawer */}

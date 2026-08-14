@@ -29,7 +29,7 @@ export default function HeroSection() {
       {/* ── Background image ───────────────────────────────── */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero.png"
+          src="/images/hero.jpg"
           alt={`Panoramic mountain view at ${siteConfig.businessName}`}
           fill
           priority
