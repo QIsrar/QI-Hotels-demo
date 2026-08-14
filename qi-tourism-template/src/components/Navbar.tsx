@@ -41,6 +41,12 @@ export default function Navbar() {
           href="/"
           className="flex items-center gap-2 text-decoration-none"
           aria-label={`${siteConfig.businessName} home`}
+          onClick={(e) => {
+            if (window.location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
         >
           <span
             className={`font-heading text-xl font-bold tracking-tight transition-colors duration-300 ${

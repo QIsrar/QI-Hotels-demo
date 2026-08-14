@@ -71,7 +71,7 @@ export default function FooterSection() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center whitespace-nowrap box-border w-max gap-2.5 bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold text-base px-8 py-4 rounded-full shadow-2xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-green-900/30"
+            className="inline-flex items-center justify-center whitespace-nowrap box-border w-full sm:w-max max-w-[280px] sm:max-w-none gap-2.5 bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold text-sm sm:text-base px-4 sm:px-8 py-3 sm:py-4 rounded-full shadow-2xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-green-900/30 mx-auto"
           >
             <WhatsAppIcon className="w-5 h-5" />
             WhatsApp Us Now
@@ -217,10 +217,10 @@ export default function FooterSection() {
               &copy; {currentYear} {siteConfig.businessName}. All rights reserved.
             </p>
             <a
-              href="https://www.linkedin.com/company/qi-tyrix"
+              href="https://qi-tyrix.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center whitespace-nowrap box-border w-max mt-3 px-8 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center whitespace-nowrap box-border w-full sm:w-max max-w-[280px] sm:max-w-none mt-3 px-4 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105 mx-auto"
               style={{
                 border: "1px solid rgba(234, 179, 8, 0.4)",
                 background: "rgba(255, 255, 255, 0.06)",
