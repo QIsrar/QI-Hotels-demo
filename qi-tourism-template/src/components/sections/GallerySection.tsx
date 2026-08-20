@@ -56,6 +56,27 @@ export default function GallerySection() {
     };
   }, [isOpen, close, goNext, goPrev]);
 
+  /* ── Touch swipe handling ──────────────────────────────── */
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const distance = touchStartX - touchEndX;
+
+    // Minimum swipe distance of 50px
+    if (distance > 50) {
+      goNext();
+    } else if (distance < -50) {
+      goPrev();
+    }
+    setTouchStartX(null);
+  };
+
   return (
     <>
       <section
@@ -128,8 +149,10 @@ export default function GallerySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="lightbox-overlay"
+            className="lightbox-overlay touch-pan-y"
             onClick={close}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
             role="dialog"
             aria-modal="true"
             aria-label="Photo lightbox"
