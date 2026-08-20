@@ -56,7 +56,7 @@ export default function StorySection() {
             <div className="relative h-[460px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src={story.imagePath}
-                alt={story.imageAlt}
+                alt={story.altText}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center"

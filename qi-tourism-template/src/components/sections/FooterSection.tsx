@@ -27,6 +27,7 @@ function FacebookIcon({ className }: { className?: string }) {
 
 const footerNavLinks = [
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Amenities", href: "#amenities" },
   { label: "Rooms", href: "#rooms" },
   { label: "Explore", href: "#attractions" },
@@ -216,39 +217,41 @@ export default function FooterSection() {
             <p className="text-white/30 text-xs">
               &copy; {currentYear} {siteConfig.businessName}. All rights reserved.
             </p>
-            <a
-              href="https://qi-tyrix.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center whitespace-nowrap box-border w-full sm:w-max max-w-[280px] sm:max-w-none mt-3 px-4 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105 mx-auto"
-              style={{
-                border: "1px solid rgba(234, 179, 8, 0.4)",
-                background: "rgba(255, 255, 255, 0.06)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                color: "rgba(229, 231, 235, 0.95)",
-                letterSpacing: "0.06em",
-                boxShadow: "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-                textShadow: "0 0 12px rgba(234, 179, 8, 0.15)",
-                boxSizing: "border-box"
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "rgba(255, 255, 255, 0.12)";
-                el.style.borderColor = "rgba(234, 179, 8, 0.7)";
-                el.style.boxShadow = "0 0 36px rgba(234, 179, 8, 0.25), 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "rgba(255, 255, 255, 0.06)";
-                el.style.borderColor = "rgba(234, 179, 8, 0.4)";
-                el.style.boxShadow = "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)";
-              }}
-              aria-label="Visit QI Tyrix on LinkedIn"
-            >
-              Developed by{" "}
-              <span className="font-bold">QI Tyrix</span>
-            </a>
+            {siteConfig.showAgencyCredit && (
+              <a
+                href="https://qi-tyrix.netlify.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center whitespace-nowrap box-border w-full sm:w-max max-w-[280px] sm:max-w-none mt-3 px-4 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105 mx-auto"
+                style={{
+                  border: "1px solid rgba(234, 179, 8, 0.4)",
+                  background: "rgba(255, 255, 255, 0.06)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  color: "rgba(229, 231, 235, 0.95)",
+                  letterSpacing: "0.06em",
+                  boxShadow: "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+                  textShadow: "0 0 12px rgba(234, 179, 8, 0.15)",
+                  boxSizing: "border-box"
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "rgba(255, 255, 255, 0.12)";
+                  el.style.borderColor = "rgba(234, 179, 8, 0.7)";
+                  el.style.boxShadow = "0 0 36px rgba(234, 179, 8, 0.25), 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "rgba(255, 255, 255, 0.06)";
+                  el.style.borderColor = "rgba(234, 179, 8, 0.4)";
+                  el.style.boxShadow = "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)";
+                }}
+                aria-label="Visit QI Tyrix on LinkedIn"
+              >
+                Developed by{" "}
+                <span className="font-bold">QI Tyrix</span>
+              </a>
+            )}
           </div>
         </div>
       </div>

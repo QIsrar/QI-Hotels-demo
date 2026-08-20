@@ -29,8 +29,8 @@ export default function HeroSection() {
       {/* ── Background image ───────────────────────────────── */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero.jpg"
-          alt={`Panoramic mountain view at ${siteConfig.businessName}`}
+          src={siteConfig.hero.imagePath}
+          alt={siteConfig.hero.altText}
           fill
           priority
           sizes="100vw"

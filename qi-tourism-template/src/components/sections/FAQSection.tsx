@@ -9,7 +9,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const waUrl = buildWhatsAppUrl();
+  const waUrl = buildWhatsAppUrl("Hi! I have a quick question about Pine Crest Retreat.");
 
   return (
     <section

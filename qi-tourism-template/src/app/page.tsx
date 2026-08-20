@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import StorySection from "@/components/sections/StorySection";
+import GallerySection from "@/components/sections/GallerySection";
 import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import AccommodationSection from "@/components/sections/AccommodationSection";
 import AttractionsSection from "@/components/sections/AttractionsSection";
@@ -22,23 +23,26 @@ export default function Home() {
         {/* 2. Story / About — property history & host philosophy */}
         <StorySection />
 
-        {/* 3. Essential Amenities — icon grid */}
+        {/* 3. Photo Gallery — masonry grid with lightbox */}
+        <GallerySection />
+
+        {/* 4. Essential Amenities — icon grid */}
         <AmenitiesSection />
 
-        {/* 4. Accommodation — room cards with booking buttons */}
+        {/* 5. Accommodation — room cards with booking buttons */}
         <AccommodationSection />
 
-        {/* 5. Nearby Attractions — regional points of interest */}
+        {/* 6. Nearby Attractions — regional points of interest */}
         <AttractionsSection />
 
-        {/* 6. Testimonials — guest reviews */}
+        {/* 7. Testimonials — guest reviews */}
         <TestimonialsSection />
 
-        {/* 7. FAQs — animated accordion */}
+        {/* 8. FAQs — animated accordion */}
         <FAQSection />
       </main>
 
-      {/* 8. Footer — contact, map, social links */}
+      {/* 9. Footer — contact, map, social links */}
       <FooterSection />
 
       {/* Floating sticky WhatsApp CTA (all viewports) */}
@@ -46,3 +50,4 @@ export default function Home() {
     </>
   );
 }
+

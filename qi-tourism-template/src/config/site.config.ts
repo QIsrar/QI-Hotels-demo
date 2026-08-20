@@ -29,6 +29,12 @@ export const siteConfig = {
     textDark: "#1A1A1A",
   },
 
+  // ── Hero ───────────────────────────────────────────────────
+  hero: {
+    imagePath: "/images/hero.jpg",
+    altText: "Panoramic mountain view at Pine Crest Retreat",
+  },
+
   // ── Logo ──────────────────────────────────────────────────
   logo: {
     path: "/images/logo.png",  // Replace with actual logo file
@@ -48,7 +54,7 @@ export const siteConfig = {
 
   // ── WhatsApp Booking ──────────────────────────────────────
   // International format, no + or spaces
-  whatsappNumber: "923001234567",
+  whatsappNumber: "923137665247",
   whatsappDefaultMessage:
     "Hi! I'd like to make a booking at Pine Crest Retreat. Please share availability.",
 
@@ -70,7 +76,7 @@ export const siteConfig = {
       "Whether you're a solo traveller seeking solitude in the pines, a couple celebrating a milestone, or a family creating memories — Pine Crest Retreat is your home in the mountains.",
     ],
     imagePath: "/images/about.jpg",
-    imageAlt: "Warm interior of Pine Crest Retreat with a stone fireplace",
+    altText: "Warm interior of Pine Crest Retreat with a stone fireplace",
     highlights: [
       { icon: "mountain", label: "1,200m Elevation" },
       { icon: "trees", label: "5 Acres of Pine Forest" },
@@ -78,6 +84,18 @@ export const siteConfig = {
       { icon: "star", label: "4.8★ Google Rated" },
     ],
   },
+
+  // ── Photo Gallery ──────────────────────────────────────────
+  gallery: [
+    { imagePath: "/images/gallery-1.jpg", altText: "Pine-framed mountain view from the retreat balcony" },
+    { imagePath: "/images/gallery-2.jpg", altText: "Cozy fireplace lounge with warm cedar interiors" },
+    { imagePath: "/images/gallery-3.jpg", altText: "Fresh breakfast spread with mountain backdrop" },
+    { imagePath: "/images/gallery-4.jpg", altText: "Stone pathway through the pine forest grounds" },
+    { imagePath: "/images/gallery-5.jpg", altText: "Evening BBQ setup under the stars" },
+    { imagePath: "/images/gallery-6.jpg", altText: "Snow-dusted pine trees surrounding the property" },
+    { imagePath: "/images/gallery-7.jpg", altText: "Guest room interior with wooden ceiling beams" },
+    { imagePath: "/images/gallery-8.jpg", altText: "Sunset panorama from the retreat rooftop" },
+  ],
 
   // ── Amenities ─────────────────────────────────────────────
   amenities: [
@@ -270,6 +288,13 @@ export const siteConfig = {
     keywords:
       "abbottabad hotel, mountain retreat pakistan, nathia gali hotel, kpk tourism, luxury guesthouse abbottabad, pine crest retreat",
   },
+
+  // ── Structured Data ───────────────────────────────────────
+  priceRange: "PKR 8,000 – 22,000",
+
+  // ── Agency Credit ─────────────────────────────────────────
+  // Set to false to hide "Developed by QI Tyrix" in the footer
+  showAgencyCredit: true,
 } as const;
 
 export type SiteConfig = typeof siteConfig;

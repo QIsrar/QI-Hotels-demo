@@ -10,6 +10,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const navLinks = [
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Amenities", href: "#amenities" },
   { label: "Rooms", href: "#rooms" },
   { label: "Explore", href: "#attractions" },
@@ -45,6 +46,7 @@ export default function Navbar() {
             if (window.location.pathname === "/") {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
+              window.history.pushState(null, "", "/");
             }
           }}
         >

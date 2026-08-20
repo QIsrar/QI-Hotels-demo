@@ -12,9 +12,11 @@ export default function Popup() {
   const waUrl = buildWhatsAppUrl();
 
   useEffect(() => {
+    if (typeof window !== "undefined" && sessionStorage.getItem("qi_popup_shown")) return;
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 500); // Popup comes rapidly as site loads
+      if (typeof window !== "undefined") sessionStorage.setItem("qi_popup_shown", "1");
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);

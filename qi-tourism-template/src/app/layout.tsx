@@ -54,8 +54,13 @@ function buildJsonLd() {
       streetAddress: siteConfig.contact.address,
       addressCountry: "PK",
     },
-    image: `${siteConfig.seo.siteUrl}${siteConfig.seo.ogImage}`,
-    priceRange: "PKR 8,000 – 22,000",
+    image: siteConfig.seo.ogImage,
+    priceRange: siteConfig.priceRange,
+    amenityFeature: siteConfig.amenities.map((a) => ({
+      "@type": "LocationFeatureSpecification",
+      name: a.label,
+      value: true,
+    })),
     ...(siteConfig.googleRating.value !== null &&
       siteConfig.googleRating.count !== null && {
         aggregateRating: {

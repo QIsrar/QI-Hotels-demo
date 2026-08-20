@@ -393,3 +393,211 @@ h6 {
     display: none !important;
   }
 }
+
+/* ── Gallery Masonry Grid ────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-auto-rows: 240px;
+  }
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Span patterns for masonry effect */
+.gallery-item-tall {
+  grid-row: span 2;
+}
+
+.gallery-item-wide {
+  grid-column: span 2;
+}
+
+/* On very small screens, no spanning to avoid layout breaks */
+@media (max-width: 479px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .gallery-item-tall,
+  .gallery-item-wide {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* Hover overlay with camera icon */
+.gallery-item-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s ease;
+}
+
+.gallery-item-overlay > * {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.gallery-item:hover .gallery-item-overlay > * {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Lightbox ────────────────────────────────────────────── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lightbox-image-wrapper {
+  position: relative;
+  width: 90vw;
+  height: 70vh;
+  max-width: 1100px;
+}
+
+@media (min-width: 768px) {
+  .lightbox-image-wrapper {
+    width: 80vw;
+    height: 75vh;
+  }
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  max-width: 90vw;
+}
+
+@media (max-width: 767px) {
+  .lightbox-caption {
+    bottom: 5rem;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Navigation arrows — positioned to sides on desktop, bottom on mobile */
+.lightbox-arrow {
+  position: absolute;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lightbox-arrow:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Desktop: arrows on left/right sides */
+.lightbox-arrow-left {
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+}
+
+.lightbox-arrow-right {
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+}
+
+/* Mobile: arrows move to bottom center, side-by-side, below caption */
+@media (max-width: 767px) {
+  .lightbox-arrow-left,
+  .lightbox-arrow-right {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .lightbox-arrow-left {
+    left: calc(50% - 60px);
+  }
+
+  .lightbox-arrow-right {
+    right: calc(50% - 60px);
+  }
+}
+
