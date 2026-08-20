@@ -283,8 +283,8 @@ export const siteConfig = {
     title: "Pine Crest Retreat | Luxury Mountain Getaway in Abbottabad",
     description:
       "Escape to Pine Crest Retreat. Experience premium hospitality, 24/7 power backup, and breathtaking Himalayan views.",
-    siteUrl: "https://your-new-domain.vercel.app", // Put your actual new Vercel link here!
-    ogImage: "https://your-new-domain.vercel.app/og-image.png", // Must be the FULL link!
+    siteUrl: "https://qi-hotels.vercel.app", // Put your actual new Vercel link here!
+    ogImage: "https://qi-hotels.vercel.app/images/hero.jpg", // Must be the FULL link!
     keywords:
       "abbottabad hotel, mountain retreat pakistan, nathia gali hotel, kpk tourism, luxury guesthouse abbottabad, pine crest retreat",
   },
