@@ -21,8 +21,13 @@ const spanPattern = [
 ];
 
 export default function GallerySection() {
-  const { gallery } = siteConfig;
+  const { gallery, galleryCategories } = siteConfig;
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredGallery = activeCategory === "All" 
+    ? gallery 
+    : gallery.filter(item => item.category === activeCategory);
 
   const isOpen = lightboxIndex !== null;
 
@@ -104,6 +109,29 @@ export default function GallerySection() {
             </p>
           </motion.div>
 
+          {/* Category Filters */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap items-center justify-center gap-2.5 mb-10"
+          >
+            {galleryCategories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all border ${
+                  activeCategory === cat
+                    ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-md"
+                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-gray-300 shadow-sm"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+
           {/* Masonry Grid */}
           <motion.div
             initial="hidden"
@@ -112,17 +140,19 @@ export default function GallerySection() {
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
             className="gallery-grid"
           >
-            {gallery.map((item, i) => (
-              <motion.button
-                key={item.imagePath}
-                variants={{
-                  hidden: { opacity: 0, y: 28 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
-                }}
-                className={`gallery-item ${spanPattern[i] || ""}`}
-                onClick={() => setLightboxIndex(i)}
-                aria-label={`View photo: ${item.altText}`}
-              >
+            <AnimatePresence mode="popLayout">
+              {filteredGallery.map((item, i) => (
+                <motion.button
+                  key={item.imagePath}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                  className={`gallery-item ${spanPattern[i % spanPattern.length] || ""}`}
+                  onClick={() => setLightboxIndex(gallery.findIndex(g => g.imagePath === item.imagePath))}
+                  aria-label={`View photo: ${item.altText}`}
+                >
                 <Image
                   src={item.imagePath}
                   alt={item.altText}
@@ -137,6 +167,7 @@ export default function GallerySection() {
                 </div>
               </motion.button>
             ))}
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>

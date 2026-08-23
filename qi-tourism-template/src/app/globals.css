@@ -296,13 +296,13 @@ h6 {
   background: white;
   border-radius: var(--radius-lg);
   padding: 2rem;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.3s ease;
 }
 
 .testimonial-card:hover {
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-hover);
 }
 
 /* ── Amenity Icon Card ───────────────────────────────────── */
@@ -467,7 +467,7 @@ h6 {
   transition: background 0.3s ease;
 }
 
-.gallery-item-overlay > * {
+.gallery-item-overlay>* {
   opacity: 0;
   transform: scale(0.8);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -477,7 +477,7 @@ h6 {
   background: rgba(0, 0, 0, 0.35);
 }
 
-.gallery-item:hover .gallery-item-overlay > * {
+.gallery-item:hover .gallery-item-overlay>* {
   opacity: 1;
   transform: scale(1);
 }
@@ -585,6 +585,7 @@ h6 {
 
 /* Mobile: arrows move to bottom center, side-by-side, below caption */
 @media (max-width: 767px) {
+
   .lightbox-arrow-left,
   .lightbox-arrow-right {
     top: auto;
@@ -600,4 +601,3 @@ h6 {
     right: calc(50% - 60px);
   }
 }
-

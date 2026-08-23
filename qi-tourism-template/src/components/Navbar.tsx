@@ -18,6 +18,10 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
+if (siteConfig.events.offersEvents) {
+  navLinks.splice(6, 0, { label: "Events", href: "#events" });
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

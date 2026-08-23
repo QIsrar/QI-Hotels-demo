@@ -35,6 +35,10 @@ const footerNavLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
+if (siteConfig.events.offersEvents) {
+  footerNavLinks.splice(6, 0, { label: "Events", href: "#events" });
+}
+
 export default function FooterSection() {
   const waUrl = buildWhatsAppUrl();
   const currentYear = new Date().getFullYear();

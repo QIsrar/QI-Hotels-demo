@@ -8,6 +8,7 @@ import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 import { siteConfig } from "@/config/site.config";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import GoogleRatingBadge from "@/components/ui/GoogleRatingBadge";
+import AvailabilitySearch from "@/components/ui/AvailabilitySearch";
 
 const stats = [
   { value: "3", label: "Room Types" },
@@ -141,12 +142,21 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.72, duration: 0.5 }}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 mb-8"
               >
                 <MapPin className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
                 <span className="text-white/55 text-xs">{siteConfig.contact.address}</span>
               </motion.div>
             </div>
+            
+            {/* Availability Search Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <AvailabilitySearch />
+            </motion.div>
           </div>
         </div>
 

@@ -86,15 +86,16 @@ export const siteConfig = {
   },
 
   // ── Photo Gallery ──────────────────────────────────────────
+  galleryCategories: ["All", "Rooms", "Dining", "Exterior", "Nature"],
   gallery: [
-    { imagePath: "/images/gallery-1.jpg", altText: "Pine-framed mountain view from the retreat balcony" },
-    { imagePath: "/images/gallery-2.jpg", altText: "Cozy fireplace lounge with warm cedar interiors" },
-    { imagePath: "/images/gallery-3.jpg", altText: "Fresh breakfast spread with mountain backdrop" },
-    { imagePath: "/images/gallery-4.jpg", altText: "Stone pathway through the pine forest grounds" },
-    { imagePath: "/images/gallery-5.jpg", altText: "Evening BBQ setup under the stars" },
-    { imagePath: "/images/gallery-6.jpg", altText: "Snow-dusted pine trees surrounding the property" },
-    { imagePath: "/images/gallery-7.jpg", altText: "Guest room interior with wooden ceiling beams" },
-    { imagePath: "/images/gallery-8.jpg", altText: "Sunset panorama from the retreat rooftop" },
+    { imagePath: "/images/gallery-1.jpg", altText: "Pine-framed mountain view from the retreat balcony", category: "Nature" },
+    { imagePath: "/images/gallery-2.jpg", altText: "Cozy fireplace lounge with warm cedar interiors", category: "Interior" },
+    { imagePath: "/images/gallery-3.jpg", altText: "Fresh breakfast spread with mountain backdrop", category: "Dining" },
+    { imagePath: "/images/gallery-4.jpg", altText: "Stone pathway through the pine forest grounds", category: "Exterior" },
+    { imagePath: "/images/gallery-5.jpg", altText: "Evening BBQ setup under the stars", category: "Dining" },
+    { imagePath: "/images/gallery-6.jpg", altText: "Snow-dusted pine trees surrounding the property", category: "Nature" },
+    { imagePath: "/images/gallery-7.jpg", altText: "Guest room interior with wooden ceiling beams", category: "Rooms" },
+    { imagePath: "/images/gallery-8.jpg", altText: "Sunset panorama from the retreat rooftop", category: "Exterior" },
   ],
 
   // ── Amenities ─────────────────────────────────────────────
@@ -140,8 +141,11 @@ export const siteConfig = {
         "Ideal for friends or family travelling together. Two comfortable single beds, mountain forest views, and all essential amenities included.",
       price: "PKR 8,000",
       priceNote: "per night",
-      imagePath: "/images/room-standard.jpg",
-      altText: "Cozy standard twin room with two single beds and mountain forest window view",
+      maxGuests: 2,
+      images: [
+        { path: "/images/room-standard.jpg", altText: "Cozy standard twin room with two single beds and mountain forest window view" },
+        { path: "/images/gallery-7.jpg", altText: "Guest room interior with wooden ceiling beams" }
+      ],
       amenities: ["Twin Beds", "Hot Water", "Wi-Fi", "Heating", "Mountain View"],
       featured: false,
     },
@@ -152,8 +156,12 @@ export const siteConfig = {
         "Our signature room — a king-sized bed, panoramic pine forest views through floor-to-ceiling windows, and a curated welcome basket on arrival.",
       price: "PKR 14,000",
       priceNote: "per night",
-      imagePath: "/images/room-deluxe.jpg",
-      altText: "Spacious deluxe king suite with panoramic mountain and pine forest views",
+      maxGuests: 2,
+      images: [
+        { path: "/images/room-deluxe.jpg", altText: "Spacious deluxe king suite with panoramic mountain and pine forest views" },
+        { path: "/images/gallery-1.jpg", altText: "Pine-framed mountain view from the retreat balcony" },
+        { path: "/images/gallery-2.jpg", altText: "Cozy fireplace lounge with warm cedar interiors" }
+      ],
       amenities: ["King Bed", "Hot Water", "Wi-Fi", "Heating", "Panoramic View", "Welcome Basket"],
       featured: true,
     },
@@ -164,8 +172,11 @@ export const siteConfig = {
         "A private sanctuary for couples. Canopy bed, stone accent walls, private balcony overlooking the valley, and bespoke romantic décor on request.",
       price: "PKR 22,000",
       priceNote: "per night",
-      imagePath: "/images/room-suite.jpg",
-      altText: "Romantic honeymoon suite with canopy bed, stone walls and private mountain balcony",
+      maxGuests: 2,
+      images: [
+        { path: "/images/room-suite.jpg", altText: "Romantic honeymoon suite with canopy bed, stone walls and private mountain balcony" },
+        { path: "/images/gallery-8.jpg", altText: "Sunset panorama from the retreat rooftop" }
+      ],
       amenities: ["Canopy Bed", "Private Balcony", "Hot Tub", "Wi-Fi", "Valley View", "Romantic Setup"],
       featured: false,
     },
@@ -268,6 +279,30 @@ export const siteConfig = {
         "Absolutely. We offer home-cooked Pakistani breakfast, lunch, and dinner prepared fresh on the premises. BBQ dinners under the stars are a guest favourite and can be arranged with 4 hours' notice. Pricing varies by menu — ask us via WhatsApp.",
     },
   ],
+
+  // ── Events / Venue ────────────────────────────────────────
+  events: {
+    offersEvents: true, // Set to false to hide the events section
+    imagePath: "/images/gallery-5.jpg",
+    altText: "Evening event setup under the stars",
+    eventTypes: [
+      {
+        icon: "party-popper",
+        title: "Private Parties",
+        desc: "Birthdays, anniversaries, and intimate gatherings.",
+      },
+      {
+        icon: "camera",
+        title: "Photoshoots",
+        desc: "Scenic backdrops for wedding and couple shoots.",
+      },
+      {
+        icon: "briefcase",
+        title: "Corporate Retreats",
+        desc: "Team building in a distraction-free mountain setting.",
+      },
+    ],
+  },
 
   // ── Social Links ──────────────────────────────────────────
   // Set to null/empty string to hide that icon
