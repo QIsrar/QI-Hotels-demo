@@ -59,22 +59,20 @@ function StepBar({ step }: { step: number }) {
       {[1, 2].map((s, idx) => (
         <div key={s} className="flex items-center flex-1">
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all duration-300 ${
-              step > s
+            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all duration-300 ${step > s
                 ? "bg-[var(--color-accent)] border-[var(--color-accent)] text-white"
                 : step === s
-                ? "bg-white border-[var(--color-accent)] text-[var(--color-accent)]"
-                : "bg-white border-gray-200 text-gray-400"
-            }`}
+                  ? "bg-white border-[var(--color-accent)] text-[var(--color-accent)]"
+                  : "bg-white border-gray-200 text-gray-400"
+              }`}
           >
             {step > s ? <CheckCircle2 className="w-4 h-4" /> : s}
           </div>
           {idx < 1 && (
             <div className="flex-1 h-0.5 mx-1">
               <div
-                className={`h-full transition-all duration-500 rounded-full ${
-                  step > 1 ? "bg-[var(--color-accent)]" : "bg-gray-200"
-                }`}
+                className={`h-full transition-all duration-500 rounded-full ${step > 1 ? "bg-[var(--color-accent)]" : "bg-gray-200"
+                  }`}
               />
             </div>
           )}
@@ -90,7 +88,7 @@ function RoomPane({
   checkIn,
   checkOut,
 }: {
-  room: (typeof siteConfig.rooms)[0];
+  room: (typeof siteConfig.rooms)[number];
   checkIn: string;
   checkOut: string;
 }) {
@@ -199,7 +197,7 @@ function MobileRoomHeader({
   checkIn,
   checkOut,
 }: {
-  room: (typeof siteConfig.rooms)[0];
+  room: (typeof siteConfig.rooms)[number];
   checkIn: string;
   checkOut: string;
 }) {
@@ -258,9 +256,8 @@ function InputField({
       <div className="relative">
         {/* Icon — for textarea, place at top; for single-line, vertically centre */}
         <div
-          className={`absolute left-3.5 text-gray-400 pointer-events-none z-10 ${
-            isTextarea ? "top-3.5" : "top-1/2 -translate-y-1/2"
-          }`}
+          className={`absolute left-3.5 text-gray-400 pointer-events-none z-10 ${isTextarea ? "top-3.5" : "top-1/2 -translate-y-1/2"
+            }`}
         >
           <Icon className="w-4 h-4" />
         </div>
