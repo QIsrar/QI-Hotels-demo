@@ -49,7 +49,7 @@ const getNights = (checkIn: string, checkOut: string) => {
   return Math.max(0, Math.round(diff / 86400000));
 };
 
-const fieldBase =
+const inputClasses =
   "w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:bg-white focus:ring-2 focus:ring-[var(--color-accent)]/20";
 
 // ── Step Progress Bar ──────────────────────────────────────────────────────
@@ -59,20 +59,22 @@ function StepBar({ step }: { step: number }) {
       {[1, 2].map((s, idx) => (
         <div key={s} className="flex items-center flex-1">
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all duration-300 ${step > s
+            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all duration-300 ${
+              step > s
                 ? "bg-[var(--color-accent)] border-[var(--color-accent)] text-white"
                 : step === s
-                  ? "bg-white border-[var(--color-accent)] text-[var(--color-accent)]"
-                  : "bg-white border-gray-200 text-gray-400"
-              }`}
+                ? "bg-white border-[var(--color-accent)] text-[var(--color-accent)]"
+                : "bg-white border-gray-200 text-gray-400"
+            }`}
           >
             {step > s ? <CheckCircle2 className="w-4 h-4" /> : s}
           </div>
           {idx < 1 && (
             <div className="flex-1 h-0.5 mx-1">
               <div
-                className={`h-full transition-all duration-500 rounded-full ${step > 1 ? "bg-[var(--color-accent)]" : "bg-gray-200"
-                  }`}
+                className={`h-full transition-all duration-500 rounded-full ${
+                  step > 1 ? "bg-[var(--color-accent)]" : "bg-gray-200"
+                }`}
               />
             </div>
           )}
@@ -256,8 +258,9 @@ function InputField({
       <div className="relative">
         {/* Icon — for textarea, place at top; for single-line, vertically centre */}
         <div
-          className={`absolute left-3.5 text-gray-400 pointer-events-none z-10 ${isTextarea ? "top-3.5" : "top-1/2 -translate-y-1/2"
-            }`}
+          className={`absolute left-3.5 text-gray-400 pointer-events-none z-10 ${
+            isTextarea ? "top-3.5" : "top-1/2 -translate-y-1/2"
+          }`}
         >
           <Icon className="w-4 h-4" />
         </div>
@@ -386,7 +389,8 @@ function BookingWizardContent() {
           onClick={(e) => e.stopPropagation()}
         >
           {/* ── Left pane (desktop) ── */}
-          <div className="md:w-72 lg:w-80 flex-shrink-0 flex flex-col">
+          {/* Ensure the wrapper has the bottom-most gradient color (#1a3009) so it seamlessly blends if content is taller */}
+          <div className="md:w-72 lg:w-80 flex-shrink-0 flex flex-col bg-[#1a3009]">
             <RoomPane room={room} checkIn={checkIn} checkOut={checkOut} />
           </div>
 
@@ -466,7 +470,7 @@ function BookingWizardContent() {
                               setCheckOut(toLocalDateStr(d));
                             }
                           }}
-                          className={fieldBase}
+                          className={inputClasses}
                         />
                       </InputField>
 
@@ -478,7 +482,7 @@ function BookingWizardContent() {
                           min={minCheckOut}
                           value={checkOut}
                           onChange={(e) => setCheckOut(e.target.value)}
-                          className={fieldBase}
+                          className={inputClasses}
                         />
                       </InputField>
 
@@ -487,7 +491,7 @@ function BookingWizardContent() {
                         <select
                           value={guests}
                           onChange={(e) => setGuests(Number(e.target.value))}
-                          className={`${fieldBase} cursor-pointer appearance-none`}
+                          className={`${inputClasses} cursor-pointer appearance-none`}
                         >
                           {Array.from(
                             { length: room.maxGuests },
@@ -544,7 +548,7 @@ function BookingWizardContent() {
                       className="space-y-5"
                     >
                       {/* Booking summary recap */}
-                      <div className="bg-gray-50 rounded-xl px-4 py-3 flex items-center justify-between text-sm">
+                      <div className="bg-gray-50 rounded-xl px-4 py-3 flex items-center justify-between text-sm border border-gray-200">
                         <div className="flex items-center gap-2 text-gray-600">
                           <CalendarDays className="w-4 h-4 text-gray-400" />
                           <span>
@@ -575,7 +579,7 @@ function BookingWizardContent() {
                           placeholder="Abdullah Khan"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className={fieldBase}
+                          className={inputClasses}
                         />
                       </InputField>
 
@@ -594,7 +598,7 @@ function BookingWizardContent() {
                           placeholder="03001234567"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className={fieldBase}
+                          className={inputClasses}
                         />
                       </InputField>
 
@@ -609,7 +613,7 @@ function BookingWizardContent() {
                           placeholder="Dietary requirements, celebration setups, early check-in…"
                           value={note}
                           onChange={(e) => setNote(e.target.value)}
-                          className={`${fieldBase} resize-none`}
+                          className={`${inputClasses} resize-none`}
                         />
                       </InputField>
 
