@@ -21,7 +21,7 @@ import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import Image from "next/image";
 
-// ── helpers ────────────────────────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────────────────
 const toLocalDateStr = (d: Date) => {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -49,10 +49,13 @@ const getNights = (checkIn: string, checkOut: string) => {
   return Math.max(0, Math.round(diff / 86400000));
 };
 
+const fieldBase =
+  "w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:bg-white focus:ring-2 focus:ring-[var(--color-accent)]/20";
+
 // ── Step Progress Bar ──────────────────────────────────────────────────────
 function StepBar({ step }: { step: number }) {
   return (
-    <div className="flex items-center gap-0 w-full">
+    <div className="flex items-center w-full">
       {[1, 2].map((s, idx) => (
         <div key={s} className="flex items-center flex-1">
           <div
@@ -81,24 +84,22 @@ function StepBar({ step }: { step: number }) {
   );
 }
 
-// ── Room Summary Pane ──────────────────────────────────────────────────────
+// ── Room Summary Pane (desktop left column) ────────────────────────────────
 function RoomPane({
   room,
   checkIn,
   checkOut,
-  guests,
 }: {
   room: (typeof siteConfig.rooms)[0];
   checkIn: string;
   checkOut: string;
-  guests: number;
 }) {
   const nights = getNights(checkIn, checkOut);
   const priceNum = parseInt(room.price.replace(/[^\d]/g, ""), 10);
   const total = nights > 0 ? priceNum * nights : priceNum;
 
   return (
-    <div className="hidden md:flex flex-col h-full bg-gradient-to-b from-[var(--color-primary)] to-[#1a3009] text-white relative overflow-hidden">
+    <div className="hidden md:flex flex-col h-full bg-gradient-to-b from-[var(--color-primary)] to-[#1a3009] text-white overflow-hidden">
       {/* Room image */}
       <div className="relative h-52 flex-shrink-0 overflow-hidden">
         <Image
@@ -118,7 +119,7 @@ function RoomPane({
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 p-6 gap-4">
+      <div className="flex flex-col flex-1 p-6 gap-4 overflow-y-auto">
         <div>
           <p className="text-white/60 text-xs uppercase tracking-widest font-semibold mb-1">
             Selected Room
@@ -142,7 +143,6 @@ function RoomPane({
           ))}
         </div>
 
-        {/* Divider */}
         <div className="border-t border-white/10" />
 
         {/* Price summary */}
@@ -158,7 +158,7 @@ function RoomPane({
                 <span className="font-semibold text-white">{nights}</span>
               </div>
               <div className="border-t border-white/10 pt-2 flex justify-between items-center">
-                <span className="font-semibold">Estimated Total</span>
+                <span className="font-semibold">Est. Total</span>
                 <span className="font-bold text-[var(--color-accent)] text-base">
                   PKR {total.toLocaleString()}
                 </span>
@@ -169,9 +169,7 @@ function RoomPane({
             <div className="bg-white/10 rounded-xl p-3 space-y-1.5 mt-1">
               <div className="flex items-center gap-2 text-white/80 text-xs">
                 <CalendarDays className="w-3.5 h-3.5 flex-shrink-0" />
-                <span>
-                  {formatDisplayDate(checkIn)}
-                </span>
+                <span>{formatDisplayDate(checkIn)}</span>
               </div>
               <div className="flex items-center gap-2 text-white/80 text-xs">
                 <CalendarDays className="w-3.5 h-3.5 flex-shrink-0 opacity-0" />
@@ -183,7 +181,7 @@ function RoomPane({
 
         {/* Star rating */}
         {siteConfig.googleRating.value && (
-          <div className="flex items-center gap-1.5 text-sm text-white/70 mt-auto">
+          <div className="flex items-center gap-1.5 text-sm text-white/70 mt-auto pt-2">
             <Star className="w-4 h-4 fill-[var(--color-accent)] text-[var(--color-accent)]" />
             <span>
               {siteConfig.googleRating.value} · {siteConfig.googleRating.count} Reviews
@@ -226,7 +224,11 @@ function MobileRoomHeader({
           </h3>
           <div className="flex items-center gap-3 mt-1 text-white/80 text-xs">
             <span>{room.price} / night</span>
-            {nights > 0 && <span>· {nights} {nights === 1 ? "night" : "nights"}</span>}
+            {nights > 0 && (
+              <span>
+                · {nights} {nights === 1 ? "night" : "nights"}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -234,30 +236,35 @@ function MobileRoomHeader({
   );
 }
 
-// ── InputField component ───────────────────────────────────────────────────
+// ── Reusable Input Field ───────────────────────────────────────────────────
 function InputField({
   label,
   icon: Icon,
-  children,
   hint,
+  isTextarea,
+  children,
 }: {
   label: string;
   icon: React.ElementType;
-  children: React.ReactNode;
   hint?: string;
+  isTextarea?: boolean;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="group">
+    <div>
       <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
         {label}
       </label>
       <div className="relative">
-        <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[var(--color-accent)] transition-colors pointer-events-none">
+        {/* Icon — for textarea, place at top; for single-line, vertically centre */}
+        <div
+          className={`absolute left-3.5 text-gray-400 pointer-events-none z-10 ${
+            isTextarea ? "top-3.5" : "top-1/2 -translate-y-1/2"
+          }`}
+        >
           <Icon className="w-4 h-4" />
         </div>
-        <div className="[&>*]:w-full [&>*]:pl-10 [&>*]:pr-4 [&>*]:py-3 [&>*]:bg-gray-50 [&>*]:border [&>*]:border-gray-200 [&>*]:rounded-xl [&>*]:text-sm [&>*]:outline-none [&>*]:transition-all [&>*]:duration-200 focus-within:[&>*]:border-[var(--color-accent)] focus-within:[&>*]:bg-white focus-within:[&>*]:ring-2 focus-within:[&>*]:ring-[var(--color-accent)]/20">
-          {children}
-        </div>
+        {children}
       </div>
       {hint && <p className="text-xs text-gray-400 mt-1.5 ml-1">{hint}</p>}
     </div>
@@ -299,15 +306,18 @@ function BookingWizardContent() {
 
       const rawIn = searchParams.get("checkin") || todayStr;
       const rawOut = searchParams.get("checkout") || tomorrowStr;
-      // Guard: never allow past dates
       const safeIn = rawIn < todayStr ? todayStr : rawIn;
       const safeOut = rawOut <= safeIn ? tomorrowStr : rawOut;
 
       setCheckIn(safeIn);
       setCheckOut(safeOut);
-      setGuests(searchParams.get("guests") ? parseInt(searchParams.get("guests")!, 10) : 1);
+      setGuests(
+        searchParams.get("guests")
+          ? parseInt(searchParams.get("guests")!, 10)
+          : 1
+      );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, searchParams]);
 
   const close = () => {
@@ -346,25 +356,31 @@ function BookingWizardContent() {
     }, 1400);
   };
 
-  if (!isOpen || !room) return null;
+  const minCheckOut = (() => {
+    if (!checkIn) return todayStr;
+    const d = new Date(checkIn + "T00:00:00");
+    d.setDate(d.getDate() + 1);
+    return toLocalDateStr(d);
+  })();
 
   const nights = getNights(checkIn, checkOut);
 
+  if (!isOpen || !room) return null;
+
   return (
     <AnimatePresence>
-      {/* Overlay */}
       <motion.div
-        key="overlay"
+        key="booking-overlay"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
         className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6"
         style={{ background: "rgba(0,0,0,0.65)" }}
         onClick={close}
       >
-        {/* Modal */}
         <motion.div
-          key="modal"
+          key="booking-modal"
           initial={{ opacity: 0, scale: 0.96, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -372,20 +388,20 @@ function BookingWizardContent() {
           className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[92vh]"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* ── Left Pane (desktop) ── */}
+          {/* ── Left pane (desktop) ── */}
           <div className="md:w-72 lg:w-80 flex-shrink-0 flex flex-col">
-            <RoomPane room={room} checkIn={checkIn} checkOut={checkOut} guests={guests} />
+            <RoomPane room={room} checkIn={checkIn} checkOut={checkOut} />
           </div>
 
-          {/* ── Right Pane ── */}
+          {/* ── Right pane ── */}
           <div className="flex flex-col flex-1 min-w-0 overflow-y-auto">
-            {/* Mobile room header */}
+            {/* Mobile banner */}
             <MobileRoomHeader room={room} checkIn={checkIn} checkOut={checkOut} />
 
             {/* Form header */}
             <div className="px-5 sm:px-7 pt-6 pb-4 border-b border-gray-100 flex items-start justify-between gap-4 flex-shrink-0">
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-3">
+                <div className="mb-3">
                   <StepBar step={step} />
                 </div>
                 <h3 className="font-heading font-bold text-gray-900 text-lg">
@@ -437,6 +453,7 @@ function BookingWizardContent() {
                       onSubmit={handleNext}
                       className="space-y-5"
                     >
+                      {/* Check-in */}
                       <InputField label="Check-in Date" icon={CalendarDays}>
                         <input
                           type="date"
@@ -444,71 +461,76 @@ function BookingWizardContent() {
                           min={todayStr}
                           value={checkIn}
                           onChange={(e) => {
-                            setCheckIn(e.target.value);
-                            if (checkOut <= e.target.value) {
-                              const d = new Date(e.target.value + "T00:00:00");
+                            const val = e.target.value;
+                            setCheckIn(val);
+                            if (checkOut <= val) {
+                              const d = new Date(val + "T00:00:00");
                               d.setDate(d.getDate() + 1);
                               setCheckOut(toLocalDateStr(d));
                             }
                           }}
+                          className={fieldBase}
                         />
                       </InputField>
 
+                      {/* Check-out */}
                       <InputField label="Check-out Date" icon={CalendarDays}>
                         <input
                           type="date"
                           required
-                          min={(() => {
-                            if (!checkIn) return todayStr;
-                            const d = new Date(checkIn + "T00:00:00");
-                            d.setDate(d.getDate() + 1);
-                            return toLocalDateStr(d);
-                          })()}
+                          min={minCheckOut}
                           value={checkOut}
                           onChange={(e) => setCheckOut(e.target.value)}
+                          className={fieldBase}
                         />
                       </InputField>
 
+                      {/* Guests */}
                       <InputField label="Number of Guests" icon={Users}>
                         <select
                           value={guests}
                           onChange={(e) => setGuests(Number(e.target.value))}
-                          className="cursor-pointer appearance-none"
+                          className={`${fieldBase} cursor-pointer appearance-none`}
                         >
-                          {Array.from({ length: room.maxGuests }, (_, i) => i + 1).map(
-                            (num) => (
-                              <option key={num} value={num}>
-                                {num} {num === 1 ? "Guest" : "Guests"}
-                              </option>
-                            )
-                          )}
+                          {Array.from(
+                            { length: room.maxGuests },
+                            (_, i) => i + 1
+                          ).map((num) => (
+                            <option key={num} value={num}>
+                              {num} {num === 1 ? "Guest" : "Guests"}
+                            </option>
+                          ))}
                         </select>
                       </InputField>
 
-                      {/* Summary strip */}
+                      {/* Live price strip */}
                       {nights > 0 && (
                         <motion.div
-                          initial={{ opacity: 0, y: 8 }}
+                          initial={{ opacity: 0, y: 6 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="flex items-center justify-between bg-[var(--color-accent)]/8 border border-[var(--color-accent)]/20 rounded-xl px-4 py-3"
+                          className="flex items-center justify-between bg-amber-50 border border-amber-200 rounded-xl px-4 py-3"
                         >
                           <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <BedDouble className="w-4 h-4 text-[var(--color-accent)]" />
+                            <BedDouble className="w-4 h-4 text-amber-600" />
                             <span>
-                              {nights} {nights === 1 ? "night" : "nights"} · {guests}{" "}
-                              {guests === 1 ? "guest" : "guests"}
+                              {nights} {nights === 1 ? "night" : "nights"} ·{" "}
+                              {guests} {guests === 1 ? "guest" : "guests"}
                             </span>
                           </div>
                           <span className="text-sm font-bold text-[var(--color-primary)]">
                             Est. PKR{" "}
                             {(
-                              parseInt(room.price.replace(/[^\d]/g, ""), 10) * nights
+                              parseInt(room.price.replace(/[^\d]/g, ""), 10) *
+                              nights
                             ).toLocaleString()}
                           </span>
                         </motion.div>
                       )}
 
-                      <button type="submit" className="w-full btn-primary py-3.5 text-base font-semibold">
+                      <button
+                        type="submit"
+                        className="w-full btn-primary py-3.5 text-base font-semibold"
+                      >
                         Continue →
                       </button>
                     </motion.form>
@@ -529,7 +551,8 @@ function BookingWizardContent() {
                         <div className="flex items-center gap-2 text-gray-600">
                           <CalendarDays className="w-4 h-4 text-gray-400" />
                           <span>
-                            {formatDisplayDate(checkIn)} → {formatDisplayDate(checkOut)}
+                            {formatDisplayDate(checkIn)} →{" "}
+                            {formatDisplayDate(checkOut)}
                           </span>
                         </div>
                         <button
@@ -541,7 +564,12 @@ function BookingWizardContent() {
                         </button>
                       </div>
 
-                      <InputField label="Full Name" icon={User} hint="Letters only (e.g. Abdullah Khan)">
+                      {/* Name */}
+                      <InputField
+                        label="Full Name"
+                        icon={User}
+                        hint="Letters only (e.g. Abdullah Khan)"
+                      >
                         <input
                           type="text"
                           required
@@ -550,9 +578,11 @@ function BookingWizardContent() {
                           placeholder="Abdullah Khan"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
+                          className={fieldBase}
                         />
                       </InputField>
 
+                      {/* Phone */}
                       <InputField
                         label="WhatsApp Number"
                         icon={Phone}
@@ -567,17 +597,22 @@ function BookingWizardContent() {
                           placeholder="03001234567"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
+                          className={fieldBase}
                         />
                       </InputField>
 
-                      <InputField label="Special Requests (Optional)" icon={MessageSquare}>
+                      {/* Special requests */}
+                      <InputField
+                        label="Special Requests (Optional)"
+                        icon={MessageSquare}
+                        isTextarea
+                      >
                         <textarea
                           rows={3}
                           placeholder="Dietary requirements, celebration setups, early check-in…"
                           value={note}
                           onChange={(e) => setNote(e.target.value)}
-                          className="!py-3 resize-none"
-                          style={{ lineHeight: "1.5" }}
+                          className={`${fieldBase} resize-none`}
                         />
                       </InputField>
 
@@ -601,7 +636,8 @@ function BookingWizardContent() {
                       </div>
 
                       <p className="text-center text-xs text-gray-400">
-                        We'll send your request via WhatsApp and confirm within minutes.
+                        We'll send your request via WhatsApp and confirm within
+                        minutes.
                       </p>
                     </motion.form>
                   )}

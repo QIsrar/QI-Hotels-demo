@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
     ],
     // Optimize formats for best performance
     formats: ["image/avif", "image/webp"],
+    // Allow quality 90 used by HeroSection
+    qualities: [75, 90],
   },
 };
 
