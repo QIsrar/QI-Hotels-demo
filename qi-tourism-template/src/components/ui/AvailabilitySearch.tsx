@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site.config";
 
@@ -21,24 +21,22 @@ export default function AvailabilitySearch() {
 
   const [checkIn, setCheckIn] = useState(formatDate(today));
   const [checkOut, setCheckOut] = useState(formatDate(tomorrow));
-  const [guests, setGuests] = useState(1);
   const [roomType, setRoomType] = useState("any");
 
-  // Automatically adjust checkout if it's earlier than checkin
-  useEffect(() => {
-    if (checkOut < checkIn) {
-      const newCheckOut = new Date(checkIn);
-      newCheckOut.setDate(newCheckOut.getDate() + 1);
-      setCheckOut(formatDate(newCheckOut));
+  const handleCheckInChange = (newCheckIn: string) => {
+    setCheckIn(newCheckIn);
+    if (checkOut <= newCheckIn) {
+      const nextDay = new Date(newCheckIn);
+      nextDay.setDate(nextDay.getDate() + 1);
+      setCheckOut(formatDate(nextDay));
     }
-  }, [checkIn, checkOut]);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
     params.set("checkin", checkIn);
     params.set("checkout", checkOut);
-    params.set("guests", guests.toString());
     
     if (roomType !== "any") {
       params.set("roomId", roomType);
@@ -67,8 +65,8 @@ export default function AvailabilitySearch() {
               required
               min={formatDate(today)}
               value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              onChange={(e) => handleCheckInChange(e.target.value)}
+              className="w-full h-[48px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
@@ -85,28 +83,11 @@ export default function AvailabilitySearch() {
               min={checkIn}
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[48px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
 
-        {/* Guests */}
-        <div className="flex-[0.7] w-full">
-          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-1.5 ml-1">
-            Guests
-          </label>
-          <div className="relative">
-            <select
-              value={guests}
-              onChange={(e) => setGuests(Number(e.target.value))}
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
-            >
-              {[1, 2, 3, 4, 5, 6].map(num => (
-                <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
-              ))}
-            </select>
-          </div>
-        </div>
 
         {/* Room Type */}
         <div className="flex-[1.2] w-full">
@@ -117,7 +98,7 @@ export default function AvailabilitySearch() {
             <select
               value={roomType}
               onChange={(e) => setRoomType(e.target.value)}
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
+              className="w-full h-[48px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
             >
               <option value="any">Any Room</option>
               {siteConfig.rooms.map(room => (
@@ -131,7 +112,7 @@ export default function AvailabilitySearch() {
         <div className="w-full md:w-auto mt-2 md:mt-0">
           <button
             type="submit"
-            className="w-full md:w-auto btn-primary py-2.5 px-6 whitespace-nowrap"
+            className="w-full md:w-auto h-[48px] btn-primary whitespace-nowrap"
           >
             Check Availability
           </button>

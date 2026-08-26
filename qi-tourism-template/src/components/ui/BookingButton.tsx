@@ -15,7 +15,6 @@ interface BookingButtonProps {
 export default function BookingButton({
   roomId,
   roomName,
-  price, // kept for backwards compatibility in interface
   variant = "primary",
   fullWidth = false,
 }: BookingButtonProps) {

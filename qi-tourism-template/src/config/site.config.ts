@@ -141,7 +141,7 @@ export const siteConfig = {
         "Ideal for friends or family travelling together. Two comfortable single beds, mountain forest views, and all essential amenities included.",
       price: "PKR 8,000",
       priceNote: "per night",
-      maxGuests: 2,
+      maxGuests: 4,
       images: [
         { path: "/images/room-standard.jpg", altText: "Cozy standard twin room with two single beds and mountain forest window view" },
         { path: "/images/gallery-7.jpg", altText: "Guest room interior with wooden ceiling beams" }
@@ -156,7 +156,7 @@ export const siteConfig = {
         "Our signature room — a king-sized bed, panoramic pine forest views through floor-to-ceiling windows, and a curated welcome basket on arrival.",
       price: "PKR 14,000",
       priceNote: "per night",
-      maxGuests: 2,
+      maxGuests: 3,
       images: [
         { path: "/images/room-deluxe.jpg", altText: "Spacious deluxe king suite with panoramic mountain and pine forest views" },
         { path: "/images/gallery-1.jpg", altText: "Pine-framed mountain view from the retreat balcony" },

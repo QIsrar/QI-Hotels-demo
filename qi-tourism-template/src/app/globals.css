@@ -17,8 +17,8 @@
   --color-text-muted: #6B7280;
   --color-border: #E8E0D5;
 
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-heading: var(--font-heading-next), "Playfair Display", Georgia, serif;
+  --font-body: var(--font-body-next), "Inter", system-ui, sans-serif;
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -246,6 +246,34 @@ h6 {
 .btn-outline:hover {
   background-color: var(--color-primary);
   color: white;
+}
+
+/* ── Booking Wizard Input ───────────────────────────────── */
+.wizard-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wizard-input:focus {
+  border-color: var(--color-accent);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(200, 144, 42, 0.15);
+}
+
+.wizard-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Textarea variant */
+textarea.wizard-input {
+  resize: none;
 }
 
 /* ── Star Rating ─────────────────────────────────────────── */

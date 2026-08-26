@@ -96,7 +96,7 @@ export default function StorySection() {
               style={{ fontFamily: "Georgia, serif", lineHeight: 0.8 }}
               aria-hidden="true"
             >
-              "
+              &ldquo;
             </div>
 
             <div className="space-y-5 mb-10">

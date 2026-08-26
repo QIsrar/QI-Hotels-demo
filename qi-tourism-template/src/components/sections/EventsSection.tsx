@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { PartyPopper, Camera, Briefcase, CalendarHeart } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import Link from "next/link";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 // Icon mapping helper
@@ -49,7 +48,7 @@ export default function EventsSection() {
               Events & Private Venue
             </h2>
             <p className="text-[var(--color-text-muted)] leading-relaxed mb-8">
-              Make your special moments unforgettable. Whether it's an intimate celebration, a corporate retreat, or a scenic photoshoot, our mountain sanctuary provides the perfect backdrop.
+              Make your special moments unforgettable. Whether it&apos;s an intimate celebration, a corporate retreat, or a scenic photoshoot, our mountain sanctuary provides the perfect backdrop.
             </p>
 
             <div className="space-y-6 mb-10">

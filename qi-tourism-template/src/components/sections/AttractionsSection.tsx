@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Clock, ExternalLink, MapPin, Search } from "lucide-react";
+import { Clock, MapPin, Search } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 
 const containerVariants = {

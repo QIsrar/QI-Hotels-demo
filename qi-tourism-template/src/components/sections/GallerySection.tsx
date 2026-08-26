@@ -115,7 +115,7 @@ export default function GallerySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap items-center justify-center gap-2.5 mb-10"
+            className="flex flex-wrap items-center justify-center gap-2.5 mb-14 md:mb-16"
           >
             {galleryCategories.map(cat => (
               <button

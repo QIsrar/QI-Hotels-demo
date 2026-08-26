@@ -118,7 +118,7 @@ function AccommodationSectionContent() {
                 <motion.div
                   key={room.id}
                   variants={cardVariants}
-                  className={`room-card relative group ${room.featured ? "featured" : ""} ${isNotSuitable ? "opacity-60 grayscale-[30%] pointer-events-none" : ""}`}
+                  className={`room-card relative group ${room.featured ? "featured" : ""}`}
                 >
                   {/* Featured badge */}
                   {room.featured && !isNotSuitable && (
@@ -128,11 +128,14 @@ function AccommodationSectionContent() {
                     </div>
                   )}
 
-                  {isNotSuitable && (
-                    <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                      Max {room.maxGuests} Guests
-                    </div>
-                  )}
+                  {/* Guest capacity badge */}
+                  <div className={`absolute top-4 ${room.featured && !isNotSuitable ? "right-4" : "left-4"} z-10 flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg ${
+                    isNotSuitable
+                      ? "bg-gray-800 text-white"
+                      : "bg-white/90 backdrop-blur-sm text-gray-700 border border-gray-200/80"
+                  }`}>
+                    {isNotSuitable ? `Max ${room.maxGuests} Guests` : `Up to ${room.maxGuests} Guests`}
+                  </div>
 
                   {/* Room image */}
                   <div className="relative h-52 overflow-hidden flex-shrink-0 cursor-pointer" onClick={() => { setActiveRoomId(room.id); setLightboxIndex(0); }}>
