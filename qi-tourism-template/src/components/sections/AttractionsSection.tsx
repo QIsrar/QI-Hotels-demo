@@ -110,12 +110,12 @@ export default function AttractionsSection() {
                   </p>
 
                   {/* Explore links */}
-                  <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                  <div className="flex flex-col sm:flex-row items-stretch gap-3 pt-4 border-t border-gray-100 mt-2">
                     <a
                       href={googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl py-3 transition-all duration-200 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                      className="flex-1 flex items-center justify-center gap-2 text-base font-semibold rounded-xl py-3.5 transition-all duration-200 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5"
                       style={{ background: "var(--color-primary)" }}
                       aria-label={`View ${attraction.name} on Google Maps`}
                     >
@@ -126,7 +126,7 @@ export default function AttractionsSection() {
                       href={googleSearchUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl py-3 border-2 border-gray-200 text-gray-600 bg-white transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-gray-50 hover:-translate-y-0.5"
+                      className="flex-1 flex items-center justify-center gap-2 text-base font-semibold rounded-xl py-3.5 border-2 border-gray-200 text-gray-700 bg-white transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-gray-50 hover:-translate-y-0.5"
                       aria-label={`Search ${attraction.name} on Google`}
                     >
                       <Search className="w-4 h-4" />

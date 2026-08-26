@@ -124,7 +124,7 @@ export default function GallerySection() {
                 className={`px-6 md:px-8 py-3 rounded-full text-sm md:text-base font-semibold whitespace-nowrap transition-all border-2 ${
                   activeCategory === cat
                     ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-md"
-                    : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200 shadow-sm"
+                    : "bg-white text-gray-600 border-gray-200 hover:border-[var(--color-primary)]/50 hover:text-[var(--color-primary)]"
                 }`}
               >
                 {cat}
