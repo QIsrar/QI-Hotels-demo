@@ -52,11 +52,11 @@ export default function AvailabilitySearch() {
       onSubmit={handleSubmit}
       className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-4 md:p-5 max-w-4xl mx-auto border border-white/20 mt-8 relative z-20"
     >
-      <div className="flex flex-col md:flex-row items-end gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
         
         {/* Check-in */}
-        <div className="flex-1 w-full">
-          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-1.5 ml-1">
+        <div className="w-full">
+          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2 ml-1">
             Check-in
           </label>
           <div className="relative">
@@ -66,14 +66,14 @@ export default function AvailabilitySearch() {
               min={formatDate(today)}
               value={checkIn}
               onChange={(e) => handleCheckInChange(e.target.value)}
-              className="w-full h-[56px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[54px] pl-2 pr-1 sm:px-4 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
 
         {/* Check-out */}
-        <div className="flex-1 w-full">
-          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-1.5 ml-1">
+        <div className="w-full">
+          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2 ml-1">
             Check-out
           </label>
           <div className="relative">
@@ -83,22 +83,22 @@ export default function AvailabilitySearch() {
               min={checkIn}
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full h-[56px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[54px] pl-2 pr-1 sm:px-4 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
 
 
         {/* Room Type */}
-        <div className="flex-[1.2] w-full">
-          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-1.5 ml-1">
+        <div className="w-full">
+          <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2 ml-1">
             Room Type
           </label>
           <div className="relative">
             <select
               value={roomType}
               onChange={(e) => setRoomType(e.target.value)}
-              className="w-full h-[56px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
+              className="w-full h-[54px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
             >
               <option value="any">Any Room</option>
               {siteConfig.rooms.map(room => (
@@ -109,15 +109,14 @@ export default function AvailabilitySearch() {
         </div>
 
         {/* Submit */}
-        <div className="w-full md:w-auto mt-2 md:mt-0">
+        <div className="w-full">
           <button
             type="submit"
-            className="w-full md:w-auto h-[56px] px-8 text-base btn-primary whitespace-nowrap"
+            className="w-full h-[54px] text-base btn-primary whitespace-nowrap"
           >
             Check Availability
           </button>
         </div>
-
       </div>
     </form>
   );
