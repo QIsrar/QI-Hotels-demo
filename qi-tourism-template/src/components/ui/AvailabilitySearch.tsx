@@ -66,7 +66,7 @@ export default function AvailabilitySearch() {
               min={formatDate(today)}
               value={checkIn}
               onChange={(e) => handleCheckInChange(e.target.value)}
-              className="w-full h-[54px] pl-2 pr-1 sm:px-4 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[54px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function AvailabilitySearch() {
               min={checkIn}
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full h-[54px] pl-2 pr-1 sm:px-4 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[54px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
