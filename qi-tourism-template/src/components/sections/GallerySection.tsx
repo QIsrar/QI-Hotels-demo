@@ -115,13 +115,13 @@ export default function GallerySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap items-center justify-center gap-2.5 mb-14 md:mb-16"
+            className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-20"
           >
             {galleryCategories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all border ${
+                className={`px-6 md:px-8 py-3 rounded-full text-sm md:text-base font-semibold whitespace-nowrap transition-all border ${
                   activeCategory === cat
                     ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-md"
                     : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-gray-300 shadow-sm"

@@ -115,21 +115,21 @@ export default function AttractionsSection() {
                       href={googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold text-white rounded-lg py-2.5 transition-all duration-200 hover:opacity-90 hover:shadow-md"
+                      className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl py-3 transition-all duration-200 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5"
                       style={{ background: "var(--color-primary)" }}
                       aria-label={`View ${attraction.name} on Google Maps`}
                     >
-                      <MapPin className="w-3.5 h-3.5" />
+                      <MapPin className="w-4 h-4" />
                       Maps
                     </a>
                     <a
                       href={googleSearchUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg py-2.5 border border-gray-200 text-gray-500 bg-transparent transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/5"
+                      className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl py-3 border-2 border-gray-200 text-gray-600 bg-white transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-gray-50 hover:-translate-y-0.5"
                       aria-label={`Search ${attraction.name} on Google`}
                     >
-                      <Search className="w-3.5 h-3.5" />
+                      <Search className="w-4 h-4" />
                       Search
                     </a>
                   </div>

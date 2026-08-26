@@ -66,7 +66,7 @@ export default function AvailabilitySearch() {
               min={formatDate(today)}
               value={checkIn}
               onChange={(e) => handleCheckInChange(e.target.value)}
-              className="w-full h-[48px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[56px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function AvailabilitySearch() {
               min={checkIn}
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full h-[48px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
+              className="w-full h-[56px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all"
             />
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function AvailabilitySearch() {
             <select
               value={roomType}
               onChange={(e) => setRoomType(e.target.value)}
-              className="w-full h-[48px] px-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
+              className="w-full h-[56px] px-5 bg-gray-50 border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent outline-none transition-all cursor-pointer"
             >
               <option value="any">Any Room</option>
               {siteConfig.rooms.map(room => (
@@ -112,7 +112,7 @@ export default function AvailabilitySearch() {
         <div className="w-full md:w-auto mt-2 md:mt-0">
           <button
             type="submit"
-            className="w-full md:w-auto h-[48px] btn-primary whitespace-nowrap"
+            className="w-full md:w-auto h-[56px] px-8 text-base btn-primary whitespace-nowrap"
           >
             Check Availability
           </button>
