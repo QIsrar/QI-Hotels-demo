@@ -58,7 +58,7 @@ export default function AttractionsSection() {
               <motion.article
                 key={attraction.name}
                 variants={cardVariants}
-                className="group flex flex-col rounded-2xl overflow-hidden bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col rounded-xl overflow-hidden bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Image with name overlay */}
                 <div className="relative h-52 overflow-hidden flex-shrink-0">

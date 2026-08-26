@@ -54,7 +54,7 @@ export default function FAQSection() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="bg-white rounded-2xl shadow-sm border border-[var(--color-border)] overflow-hidden">
+          <div className="bg-white rounded-xl shadow-sm border border-[var(--color-border)] overflow-hidden">
             {siteConfig.faqs.map((faq, i) => (
               <div
                 key={i}

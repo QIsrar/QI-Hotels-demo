@@ -50,7 +50,7 @@ export default function AvailabilitySearch() {
   return (
     <form 
       onSubmit={handleSubmit}
-      className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-4 md:p-5 max-w-4xl mx-auto border border-white/20 mt-8 relative z-20"
+      className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl p-6 md:p-8 max-w-4xl mx-auto border border-white/20 mt-8 relative z-20"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
         
