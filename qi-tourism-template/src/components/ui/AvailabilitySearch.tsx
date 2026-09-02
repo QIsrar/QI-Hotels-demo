@@ -6,12 +6,12 @@ import { siteConfig } from "@/config/site.config";
 
 export default function AvailabilitySearch() {
   const router = useRouter();
-  
+
   // Today and Tomorrow logic for default dates
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  
+
   const formatDate = (d: Date) => {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -37,7 +37,7 @@ export default function AvailabilitySearch() {
     const params = new URLSearchParams();
     params.set("checkin", checkIn);
     params.set("checkout", checkOut);
-    
+
     if (roomType !== "any") {
       params.set("roomId", roomType);
       params.set("booking", "open");
@@ -48,12 +48,12 @@ export default function AvailabilitySearch() {
   };
 
   return (
-    <form 
+    <form
       onSubmit={handleSubmit}
       className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl p-6 md:p-8 max-w-4xl mx-auto border border-white/20 mt-8 relative z-20"
     >
       <div className="flex flex-wrap gap-4 items-end">
-        
+
         {/* Check-in */}
         <div className="w-full sm:w-[calc(50%-0.5rem)] lg:flex-1">
           <label className="block text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2 ml-1">
