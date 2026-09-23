@@ -31,6 +31,8 @@ export default function BookingButton({
 
   const href = `/?${queryParams.toString()}`;
 
+  const isThisRoomOpen = searchParams.get("booking") === "open" && searchParams.get("roomId") === roomId;
+
   return (
     <Link
       href={href}
@@ -39,6 +41,8 @@ export default function BookingButton({
         fullWidth ? "w-full justify-center" : ""
       }`}
       aria-label={`Book the ${roomName}`}
+      aria-haspopup="dialog"
+      aria-expanded={isThisRoomOpen}
     >
       <WhatsAppIcon className="w-4 h-4" />
       Book Now

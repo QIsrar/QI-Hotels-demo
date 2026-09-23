@@ -138,7 +138,20 @@ function AccommodationSectionContent() {
                   </div>
 
                   {/* Room image */}
-                  <div className="relative h-52 overflow-hidden flex-shrink-0 cursor-pointer" onClick={() => { setActiveRoomId(room.id); setLightboxIndex(0); }}>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View photos of ${room.name}`}
+                    className="relative h-52 overflow-hidden flex-shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                    onClick={() => { setActiveRoomId(room.id); setLightboxIndex(0); }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActiveRoomId(room.id);
+                        setLightboxIndex(0);
+                      }
+                    }}
+                  >
                     <Image
                       src={room.images[0].path}
                       alt={room.images[0].altText}

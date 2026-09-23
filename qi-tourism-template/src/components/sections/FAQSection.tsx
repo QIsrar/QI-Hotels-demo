@@ -38,7 +38,7 @@ export default function FAQSection() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-accent)] font-semibold hover:underline"
+              className="text-[var(--color-accent-dark)] font-semibold hover:underline"
             >
               WhatsApp us
             </a>{" "}
@@ -58,25 +58,28 @@ export default function FAQSection() {
             {siteConfig.faqs.map((faq, i) => (
               <div
                 key={i}
-                className={`border-b border-[var(--color-border)] last:border-b-0 ${
-                  openIndex === i ? "bg-amber-50/50" : ""
-                } transition-colors duration-200`}
+                className={`border-b border-[var(--color-border)] last:border-b-0 border-l-4 transition-all duration-200 ${
+                  openIndex === i
+                    ? "border-l-[var(--color-accent)] bg-amber-50/40"
+                    : "border-l-transparent hover:border-l-[var(--color-accent-light)] hover:bg-stone-50/70"
+                }`}
               >
                 <button
-                  className="w-full flex justify-between items-start gap-4 px-6 py-5 text-left hover:bg-amber-50/30 transition-colors"
+                  type="button"
+                  className="w-full flex justify-between items-start gap-4 px-6 sm:px-7 py-5 sm:py-6 text-left transition-colors cursor-pointer"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   aria-expanded={openIndex === i}
                   aria-controls={`faq-answer-${i}`}
                   id={`faq-trigger-${i}`}
                 >
-                  <div className="flex items-start gap-3 flex-1">
+                  <div className="flex items-start gap-3.5 flex-1">
                     <HelpCircle
-                      className={`w-4 h-4 flex-shrink-0 mt-0.5 transition-colors ${
-                        openIndex === i ? "text-[var(--color-accent)]" : "text-gray-300"
+                      className={`w-4 h-4 flex-shrink-0 mt-0.5 transition-colors duration-200 ${
+                        openIndex === i ? "text-[var(--color-accent)]" : "text-stone-300"
                       }`}
                     />
                     <span
-                      className={`font-medium text-base leading-snug transition-colors ${
+                      className={`font-semibold text-base sm:text-[1.05rem] leading-snug transition-colors duration-200 ${
                         openIndex === i ? "text-[var(--color-primary)]" : "text-[var(--color-text)]"
                       }`}
                     >
@@ -84,16 +87,16 @@ export default function FAQSection() {
                     </span>
                   </div>
                   <span
-                    className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors ${
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                       openIndex === i
-                        ? "bg-[var(--color-accent)] text-white"
-                        : "bg-gray-100 text-gray-400"
+                        ? "bg-[var(--color-accent)] text-white shadow-md rotate-180"
+                        : "bg-stone-100 text-stone-500 hover:bg-stone-200"
                     }`}
                   >
                     {openIndex === i ? (
-                      <Minus className="w-3.5 h-3.5" />
+                      <Minus className="w-4 h-4" />
                     ) : (
-                      <Plus className="w-3.5 h-3.5" />
+                      <Plus className="w-4 h-4" />
                     )}
                   </span>
                 </button>
@@ -108,11 +111,11 @@ export default function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-5 pl-[3.25rem]">
-                        <p className="text-gray-500 leading-relaxed text-sm md:text-base">
+                      <div className="px-6 sm:px-7 pb-6 pt-1 pl-[3.25rem] sm:pl-[3.5rem] pr-6 sm:pr-8">
+                        <p className="text-stone-600 leading-relaxed text-sm md:text-base">
                           {faq.answer}
                         </p>
                       </div>

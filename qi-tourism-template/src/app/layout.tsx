@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   keywords: siteConfig.seo.keywords,
   authors: [{ name: siteConfig.businessName }],
   metadataBase: new URL(siteConfig.seo.siteUrl),
+  alternates: {
+    canonical: siteConfig.seo.siteUrl,
+  },
   openGraph: {
     type: "website",
     url: siteConfig.seo.siteUrl,
@@ -96,7 +99,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable}`}
+      suppressHydrationWarning
+      style={
+        {
+          "--color-primary": siteConfig.brand.primaryColor,
+          "--color-accent": siteConfig.brand.accentColor,
+          "--color-bg": siteConfig.brand.bgLight,
+          "--color-text": siteConfig.brand.textDark,
+        } as React.CSSProperties
+      }
+    >
       <head>
         {/* JSON-LD Structured Data */}
         <script

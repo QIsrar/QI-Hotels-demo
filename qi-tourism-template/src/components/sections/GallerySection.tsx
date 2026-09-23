@@ -34,15 +34,15 @@ export default function GallerySection() {
   /* ── Keyboard navigation ───────────────────────────────── */
   const goNext = useCallback(() => {
     setLightboxIndex((prev) =>
-      prev !== null ? (prev + 1) % gallery.length : null
+      prev !== null ? (prev + 1) % filteredGallery.length : null
     );
-  }, [gallery.length]);
+  }, [filteredGallery.length]);
 
   const goPrev = useCallback(() => {
     setLightboxIndex((prev) =>
-      prev !== null ? (prev - 1 + gallery.length) % gallery.length : null
+      prev !== null ? (prev - 1 + filteredGallery.length) % filteredGallery.length : null
     );
-  }, [gallery.length]);
+  }, [filteredGallery.length]);
 
   const close = useCallback(() => setLightboxIndex(null), []);
 
@@ -150,7 +150,7 @@ export default function GallerySection() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
                   className={`gallery-item ${spanPattern[i % spanPattern.length] || ""}`}
-                  onClick={() => setLightboxIndex(gallery.findIndex(g => g.imagePath === item.imagePath))}
+                  onClick={() => setLightboxIndex(i)}
                   aria-label={`View photo: ${item.altText}`}
                 >
                 <Image
@@ -174,7 +174,7 @@ export default function GallerySection() {
 
       {/* ── Lightbox Overlay ─────────────────────────────────── */}
       <AnimatePresence>
-        {isOpen && lightboxIndex !== null && (
+        {isOpen && lightboxIndex !== null && filteredGallery[lightboxIndex] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -199,8 +199,8 @@ export default function GallerySection() {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={gallery[lightboxIndex].imagePath}
-                alt={gallery[lightboxIndex].altText}
+                src={filteredGallery[lightboxIndex].imagePath}
+                alt={filteredGallery[lightboxIndex].altText}
                 fill
                 sizes="95vw"
                 className="object-contain"
@@ -211,10 +211,10 @@ export default function GallerySection() {
             {/* Caption */}
             <div className="lightbox-caption" onClick={(e) => e.stopPropagation()}>
               <p className="text-white/80 text-sm text-center">
-                {gallery[lightboxIndex].altText}
+                {filteredGallery[lightboxIndex].altText}
               </p>
               <p className="text-white/40 text-xs text-center mt-1">
-                {lightboxIndex + 1} / {gallery.length}
+                {lightboxIndex + 1} / {filteredGallery.length}
               </p>
             </div>
 

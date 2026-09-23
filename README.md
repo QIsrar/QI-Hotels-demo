@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/readme-assets/hero-mockup.png" alt="Pine Crest Retreat — QI Tyrix Hotel Template Preview" width="880" style="border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.15);" />
+  <img src="docs/hero-mockup.png" alt="Pine Crest Retreat — QI Tyrix Hotel Template Preview" width="880" style="border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.15);" />
 </p>
 
 <h1 align="center">🏔️ Pine Crest Retreat — Luxury Boutique Hospitality Template</h1>
@@ -63,7 +63,7 @@ graph TD
 - **Smart Promotional Modal**: Unobtrusive, exit-intent / scroll-depth triggered discount popup with backdrop click and `Escape` keyboard dismissal.
 
 <p align="center">
-  <img src="public/readme-assets/booking-flow.png" alt="Booking Wizard Flow" width="700" style="border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" />
+  <img src="docs/booking-flow.png" alt="Booking Wizard Flow" width="700" style="border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" />
 </p>
 
 ### 📸 Media & Discovery
@@ -72,7 +72,7 @@ graph TD
 - **Regional Attractions**: Travel time badges, destination photography, and direct Google Maps / Google Search links for local landmarks.
 
 <p align="center">
-  <img src="public/readme-assets/gallery-preview.png" alt="Gallery Lightbox Preview" width="700" style="border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" />
+  <img src="docs/gallery-preview.png" alt="Gallery Lightbox Preview" width="700" style="border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" />
 </p>
 
 ### 🔍 Performance, SEO & Accessibility

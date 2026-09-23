@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 import { siteConfig } from "@/config/site.config";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -43,14 +45,44 @@ export default function FooterSection() {
   const waUrl = buildWhatsAppUrl();
   const currentYear = new Date().getFullYear();
 
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+  const [newsletterError, setNewsletterError] = useState("");
+  const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+    };
+  }, []);
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = newsletterEmail.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!trimmed || !emailRegex.test(trimmed)) {
+      setNewsletterError("Please enter a valid email address.");
+      return;
+    }
+
+    setNewsletterError("");
+    setNewsletterSuccess(true);
+    setNewsletterEmail("");
+
+    if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+    resetTimerRef.current = setTimeout(() => {
+      setNewsletterSuccess(false);
+    }, 4500);
+  };
+
   return (
     <footer id="contact" aria-label="Site footer">
 
-      {/* ── CTA Band ──────────────────────────────────────────── */}
+      {/* ── CTA Band with Seamless Gradient Transition into Dark Footer ── */}
       <div
-        className="relative overflow-hidden py-16"
+        className="relative overflow-hidden py-16 sm:py-20"
         style={{
-          background: "linear-gradient(135deg, var(--color-primary) 0%, #1e3810 60%, #3d6b1f 100%)",
+          background: "linear-gradient(180deg, var(--color-primary) 0%, #1e3810 50%, #15250d 80%, #111a0c 100%)",
         }}
       >
         {/* Decorative circles */}
@@ -58,6 +90,9 @@ export default function FooterSection() {
           style={{ background: "radial-gradient(circle, var(--color-accent), transparent)" }} />
         <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full opacity-10"
           style={{ background: "radial-gradient(circle, #fff, transparent)" }} />
+
+        {/* Soft bottom blend to dark footer */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#111a0c] to-transparent pointer-events-none" />
 
         <div className="container-tight relative z-10 text-center">
           <p className="text-amber-300 font-semibold tracking-widest text-xs uppercase mb-4">
@@ -85,24 +120,24 @@ export default function FooterSection() {
         </div>
       </div>
 
-      {/* ── Main Footer Body ──────────────────────────────────── */}
+      {/* ── Main Footer Body (Balanced 12-Column Grid) ─────────── */}
       <div className="bg-[#111a0c]">
         <div className="container-tight py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
 
-            {/* Col 1: Brand */}
-            <div className="lg:col-span-1">
+            {/* Col 1: Brand (4 cols) */}
+            <div className="lg:col-span-4">
               <h2
                 className="text-white text-xl font-bold mb-1"
                 style={{ fontFamily: "var(--font-heading)", color: "#fff" }}
               >
                 {siteConfig.businessName}
               </h2>
-              <p className="text-amber-400/80 text-sm italic mb-5">
+              <p className="text-amber-400/80 text-sm italic mb-4">
                 {siteConfig.tagline}
               </p>
-              <p className="text-white/50 text-sm leading-relaxed mb-8">
-                A luxury mountain retreat in the Himalayan foothills of Abbottabad, Pakistan.
+              <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-sm">
+                A luxury mountain retreat nestled in the serene pine forests of Abbottabad. Escape the city and rediscover tranquility.
               </p>
 
               {/* Social icons */}
@@ -141,10 +176,10 @@ export default function FooterSection() {
               </div>
             </div>
 
-            {/* Col 2: Quick links */}
-            <div>
+            {/* Col 2: Quick links (2 cols) */}
+            <div className="lg:col-span-2">
               <h3 className="text-white/90 text-xs font-bold uppercase tracking-widest mb-6">
-                Quick Links
+                Navigation
               </h3>
               <ul className="space-y-3">
                 {footerNavLinks.map((link) => (
@@ -161,15 +196,15 @@ export default function FooterSection() {
               </ul>
             </div>
 
-            {/* Col 3: Contact */}
-            <div>
+            {/* Col 3: Contact & Newsletter (3 cols) */}
+            <div className="lg:col-span-3">
               <h3 className="text-white/90 text-xs font-bold uppercase tracking-widest mb-6">
-                Contact
+                Contact & Inquiries
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3.5 mb-6">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-white/50 text-sm leading-relaxed">
+                  <span className="text-white/50 text-xs sm:text-sm leading-relaxed">
                     {siteConfig.contact.address}
                   </span>
                 </li>
@@ -177,7 +212,7 @@ export default function FooterSection() {
                   <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                   <Link
                     href={`tel:${siteConfig.contact.phone}`}
-                    className="text-white/50 text-sm hover:text-white transition-colors"
+                    className="text-white/50 text-xs sm:text-sm hover:text-white transition-colors"
                   >
                     {siteConfig.contact.phone}
                   </Link>
@@ -186,20 +221,78 @@ export default function FooterSection() {
                   <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
                   <Link
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="text-white/50 text-sm hover:text-white transition-colors"
+                    className="text-white/50 text-xs sm:text-sm hover:text-white transition-colors"
                   >
                     {siteConfig.contact.email}
                   </Link>
                 </li>
               </ul>
+
+              {/* Newsletter Signup (Inline, non-blocking confirmation) */}
+              <div className="pt-4 border-t border-white/10">
+                <h4 className="text-white/80 text-[0.7rem] font-semibold uppercase tracking-wider mb-2">
+                  Stay Updated
+                </h4>
+                <p className="text-white/40 text-xs mb-3">
+                  Get seasonal retreat deals and mountain weather alerts.
+                </p>
+                <AnimatePresence mode="wait">
+                  {newsletterSuccess ? (
+                    <motion.div
+                      key="newsletter-success"
+                      initial={{ opacity: 0, y: 3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -3 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-medium"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      <span>Thanks — you&apos;re on the list!</span>
+                    </motion.div>
+                  ) : (
+                    <motion.form
+                      key="newsletter-form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onSubmit={handleNewsletterSubmit}
+                      className="flex flex-col gap-1.5"
+                    >
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="email"
+                          value={newsletterEmail}
+                          onChange={(e) => {
+                            setNewsletterEmail(e.target.value);
+                            if (newsletterError) setNewsletterError("");
+                          }}
+                          placeholder="Your email address"
+                          required
+                          aria-label="Email address for newsletter"
+                          className="w-full h-9 px-3 bg-white/5 border border-white/15 rounded-lg text-xs text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] transition-all"
+                        />
+                        <button
+                          type="submit"
+                          className="h-9 px-3.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)] text-white text-xs font-semibold rounded-lg transition-colors whitespace-nowrap shadow cursor-pointer"
+                        >
+                          Join
+                        </button>
+                      </div>
+                      {newsletterError && (
+                        <p className="text-rose-400 text-[0.7rem] pl-1 font-medium">{newsletterError}</p>
+                      )}
+                    </motion.form>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
-            {/* Col 4: Map */}
-            <div>
+            {/* Col 4: Find Us / Map (3 cols) */}
+            <div className="lg:col-span-3">
               <h3 className="text-white/90 text-xs font-bold uppercase tracking-widest mb-6">
                 Find Us
               </h3>
-              <div className="rounded-xl overflow-hidden border border-white/10 h-44">
+              <div className="rounded-xl overflow-hidden border border-white/10 h-52 relative z-10 shadow-lg">
                 <iframe
                   title={`${siteConfig.businessName} on Google Maps`}
                   src={siteConfig.contact.mapEmbedUrl}
@@ -215,46 +308,46 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* ── Bottom Bar (Separated Agency Badge) ────────────────── */}
         <div className="border-t border-white/5">
-          <div className="container-tight py-6 pb-20 md:pb-24 flex flex-col items-center justify-center gap-4 text-center">
-            <p className="text-white/30 text-xs">
+          <div className="container-tight py-8 pb-24 flex flex-col items-center justify-center text-center">
+            <p className="text-white/40 text-xs sm:text-sm">
               &copy; {currentYear} {siteConfig.businessName}. All rights reserved.
             </p>
             {siteConfig.showAgencyCredit && (
-              <a
-                href="https://qi-tyrix.netlify.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center whitespace-nowrap box-border w-full sm:w-max max-w-[280px] sm:max-w-none mt-3 px-4 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105 mx-auto"
-                style={{
-                  border: "1px solid rgba(234, 179, 8, 0.4)",
-                  background: "rgba(255, 255, 255, 0.06)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  color: "rgba(229, 231, 235, 0.95)",
-                  letterSpacing: "0.06em",
-                  boxShadow: "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-                  textShadow: "0 0 12px rgba(234, 179, 8, 0.15)",
-                  boxSizing: "border-box"
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "rgba(255, 255, 255, 0.12)";
-                  el.style.borderColor = "rgba(234, 179, 8, 0.7)";
-                  el.style.boxShadow = "0 0 36px rgba(234, 179, 8, 0.25), 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "rgba(255, 255, 255, 0.06)";
-                  el.style.borderColor = "rgba(234, 179, 8, 0.4)";
-                  el.style.boxShadow = "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)";
-                }}
-                aria-label="Visit QI Tyrix on LinkedIn"
-              >
-                Developed by{" "}
-                <span className="font-bold">QI Tyrix</span>
-              </a>
+              <div className="pt-4 mt-3 border-t border-white/5 w-full flex justify-center">
+                <a
+                  href="https://qi-tyrix.netlify.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center whitespace-nowrap box-border w-auto px-5 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-300 hover:scale-105"
+                  style={{
+                    border: "1px solid rgba(234, 179, 8, 0.4)",
+                    background: "rgba(255, 255, 255, 0.06)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    color: "rgba(229, 231, 235, 0.95)",
+                    letterSpacing: "0.06em",
+                    boxShadow: "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget;
+                    el.style.background = "rgba(255, 255, 255, 0.12)";
+                    el.style.borderColor = "rgba(234, 179, 8, 0.7)";
+                    el.style.boxShadow = "0 0 36px rgba(234, 179, 8, 0.25), 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget;
+                    el.style.background = "rgba(255, 255, 255, 0.06)";
+                    el.style.borderColor = "rgba(234, 179, 8, 0.4)";
+                    el.style.boxShadow = "0 0 24px rgba(234, 179, 8, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)";
+                  }}
+                  aria-label="Visit QI Tyrix agency website"
+                >
+                  Developed by{" "}
+                  <span className="font-bold ml-1 text-amber-300">QI Tyrix</span>
+                </a>
+              </div>
             )}
           </div>
         </div>

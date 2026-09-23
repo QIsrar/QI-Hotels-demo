@@ -3,14 +3,31 @@
 /* ── Google Fonts (preconnected in layout.tsx <head>) ─────── */
 /* Fonts are loaded via <link rel="preconnect"> + stylesheet in layout */
 
-/* ── CSS Custom Properties (Brand Tokens) ────────────────── */
+/* ── Tailwind v4 Theme Configuration ────────────────────────── */
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-bg: var(--color-bg);
+  --color-bg-card: var(--color-bg-card);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+/* ── CSS Custom Properties (Brand Tokens with Fallbacks) ── */
 :root {
   --color-primary: #2D5016;
-  --color-primary-light: #3d6b1f;
-  --color-primary-dark: #1e3810;
+  --color-primary-light: color-mix(in srgb, var(--color-primary) 80%, white);
+  --color-primary-dark: color-mix(in srgb, var(--color-primary) 80%, black);
   --color-accent: #C8902A;
-  --color-accent-light: #d9a43e;
-  --color-accent-dark: #a87420;
+  --color-accent-light: color-mix(in srgb, var(--color-accent) 80%, white);
+  --color-accent-dark: #9A6715;
   --color-bg: #FAF7F2;
   --color-bg-card: #FFFFFF;
   --color-text: #1A1A1A;
@@ -37,6 +54,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+[role="button"],
+button,
+a,
+select,
+input[type="submit"],
+input[type="button"],
+.clickable {
+  cursor: pointer;
 }
 
 html {
@@ -130,7 +157,7 @@ h6 {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-dark);
 }
 
 .section-heading {

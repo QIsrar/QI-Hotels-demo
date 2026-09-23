@@ -63,19 +63,23 @@ export default function StorySection() {
                 loading="lazy"
               />
               {/* Gradient at bottom for chip readability */}
-              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/55 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
 
-              {/* Stat chip badges — inside the image, bottom overlay */}
-              <div className="absolute bottom-5 left-5 right-5 z-10 flex gap-2 flex-wrap">
+              {/* Stat chip badges — standardized 2x2 grid */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 z-10 grid grid-cols-2 gap-2.5 sm:gap-3">
                 {story.highlights.map((h) => {
                   const Icon = iconMap[h.icon] ?? Star;
                   return (
                     <div
                       key={h.label}
-                      className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-full shadow-md border border-white/60"
+                      className="h-11 sm:h-12 flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3 sm:px-4 rounded-xl shadow-lg border border-white/80 transition-all hover:bg-white"
                     >
-                      <Icon className="w-3 h-3 text-amber-600 flex-shrink-0" />
-                      <span className="text-[0.68rem] font-semibold text-gray-800 whitespace-nowrap">{h.label}</span>
+                      <div className="w-6 h-6 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-3.5 h-3.5 text-amber-600" />
+                      </div>
+                      <span className="text-xs font-semibold text-stone-800 truncate leading-tight">
+                        {h.label}
+                      </span>
                     </div>
                   );
                 })}

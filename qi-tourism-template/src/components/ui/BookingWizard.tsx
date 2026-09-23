@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -27,10 +27,14 @@ const toLocalDateStr = (d: Date) => {
   return `${y}-${m}-${day}`;
 };
 
+const parseLocalDate = (dateStr: string) => {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  return new Date(y, m - 1, d);
+};
+
 const formatDisplayDate = (dateStr: string) => {
   if (!dateStr) return "";
-  const [y, m, d] = dateStr.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString("en-PK", {
+  return parseLocalDate(dateStr).toLocaleDateString("en-PK", {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -151,12 +155,14 @@ function RoomHeader({
 
 // ── Reusable Input Field ───────────────────────────────────────────────────
 function InputField({
+  id,
   label,
   icon: Icon,
   hint,
   isTextarea,
   children,
 }: {
+  id?: string;
   label: string;
   icon: React.ElementType;
   hint?: string;
@@ -165,15 +171,19 @@ function InputField({
 }) {
   return (
     <div>
-      <label style={{
-        display: 'block',
-        fontSize: '0.75rem',
-        fontWeight: 700,
-        color: '#374151',
-        textTransform: 'uppercase' as const,
-        letterSpacing: '0.05em',
-        marginBottom: '0.5rem',
-      }}>
+      <label
+        htmlFor={id}
+        style={{
+          display: 'block',
+          fontSize: '0.75rem',
+          fontWeight: 700,
+          color: '#374151',
+          textTransform: 'uppercase' as const,
+          letterSpacing: '0.05em',
+          marginBottom: '0.5rem',
+          cursor: id ? 'pointer' : 'default',
+        }}
+      >
         {label}
       </label>
       <div className="relative">
@@ -225,9 +235,29 @@ function BookingWizardModal({
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   const todayStr = toLocalDateStr(new Date());
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
+  const maxDateStr = toLocalDateStr(maxDate);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") close();
+    }
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [close]);
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
+    if (checkOut <= checkIn) {
+      const d = parseLocalDate(checkIn);
+      d.setDate(d.getDate() + 1);
+      setCheckOut(toLocalDateStr(d));
+    }
     setStep(2);
   };
 
@@ -257,7 +287,7 @@ function BookingWizardModal({
 
   const minCheckOut = (() => {
     if (!checkIn) return todayStr;
-    const d = new Date(checkIn + "T00:00:00");
+    const d = parseLocalDate(checkIn);
     d.setDate(d.getDate() + 1);
     return toLocalDateStr(d);
   })();
@@ -279,6 +309,9 @@ function BookingWizardModal({
       >
         <motion.div
           key="booking-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="booking-modal-title"
           initial={{ opacity: 0, scale: 0.96, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -297,7 +330,7 @@ function BookingWizardModal({
                 <div className="mb-3">
                   <StepBar step={step} setStep={setStep} />
                 </div>
-                <h3 className="font-heading font-bold text-gray-900 text-lg">
+                <h3 id="booking-modal-title" className="font-heading font-bold text-gray-900 text-lg">
                   {step === 1 ? "Select Your Dates" : "Your Details"}
                 </h3>
                 <p className="text-gray-500 text-sm mt-0.5">
@@ -347,17 +380,19 @@ function BookingWizardModal({
                       className="space-y-6"
                     >
                       {/* Check-in */}
-                      <InputField label="Check-in Date" icon={CalendarDays}>
+                      <InputField id="booking-checkin" label="Check-in Date" icon={CalendarDays}>
                         <input
+                          id="booking-checkin"
                           type="date"
                           required
                           min={todayStr}
+                          max={maxDateStr}
                           value={checkIn}
                           onChange={(e) => {
                             const val = e.target.value;
                             setCheckIn(val);
                             if (checkOut <= val) {
-                              const d = new Date(val + "T00:00:00");
+                              const d = parseLocalDate(val);
                               d.setDate(d.getDate() + 1);
                               setCheckOut(toLocalDateStr(d));
                             }
@@ -367,11 +402,13 @@ function BookingWizardModal({
                       </InputField>
 
                       {/* Check-out */}
-                      <InputField label="Check-out Date" icon={CalendarDays}>
+                      <InputField id="booking-checkout" label="Check-out Date" icon={CalendarDays}>
                         <input
+                          id="booking-checkout"
                           type="date"
                           required
                           min={minCheckOut}
+                          max={maxDateStr}
                           value={checkOut}
                           onChange={(e) => setCheckOut(e.target.value)}
                           className={inputClasses}
@@ -379,8 +416,9 @@ function BookingWizardModal({
                       </InputField>
 
                       {/* Guests */}
-                      <InputField label="Number of Guests" icon={Users}>
+                      <InputField id="booking-guests" label="Number of Guests" icon={Users}>
                         <select
+                          id="booking-guests"
                           value={guests}
                           onChange={(e) => setGuests(Number(e.target.value))}
                           className={inputClasses}
@@ -460,15 +498,17 @@ function BookingWizardModal({
 
                       {/* Name */}
                       <InputField
+                        id="booking-name"
                         label="Full Name"
                         icon={User}
-                        hint="Letters only (e.g. Abdullah Khan)"
+                        hint="Letters, spaces, hyphens & apostrophes allowed (e.g. Abdullah Khan, O'Connor, Al-Sayed)"
                       >
                         <input
+                          id="booking-name"
                           type="text"
                           required
-                          pattern="^[A-Za-z\s]+$"
-                          title="Name should only contain letters and spaces"
+                          pattern="^[A-Za-z\u00C0-\u024F\s\-']+$"
+                          title="Name can contain letters, spaces, hyphens, and apostrophes (e.g. Abdullah Khan, O'Connor, Al-Sayed)"
                           placeholder="Abdullah Khan"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
@@ -478,30 +518,34 @@ function BookingWizardModal({
 
                       {/* Phone */}
                       <InputField
+                        id="booking-phone"
                         label="WhatsApp Number"
                         icon={Phone}
-                        hint="11-digit Pakistani number, e.g. 03001234567"
+                        hint="Pakistani (e.g. 03001234567) or International (e.g. +447911123456)"
                       >
                         <input
+                          id="booking-phone"
                           type="tel"
                           required
-                          pattern="^\d{11}$"
-                          title="Phone number must be exactly 11 digits"
-                          maxLength={11}
-                          placeholder="03001234567"
+                          pattern="^(?:0\d{10}|\+?[1-9]\d{6,14})$"
+                          title="Enter an 11-digit local number (e.g. 03001234567) or international number with country code (e.g. +447911123456)"
+                          maxLength={16}
+                          placeholder="+92 300 1234567 or 03001234567"
                           value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
+                          onChange={(e) => setPhone(e.target.value.replace(/[\s-]/g, ""))}
                           className={inputClasses}
                         />
                       </InputField>
 
                       {/* Special requests */}
                       <InputField
+                        id="booking-note"
                         label="Special Requests (Optional)"
                         icon={MessageSquare}
                         isTextarea
                       >
                         <textarea
+                          id="booking-note"
                           rows={3}
                           placeholder="Dietary requirements, celebration setups, early check-in…"
                           value={note}

@@ -165,22 +165,22 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
-          className="w-full"
+          className="w-full relative z-10"
         >
-          <div className="container-tight">
+          <div className="container-tight pb-0">
             <div
-              className="flex items-stretch divide-x divide-white/10 rounded-t-2xl overflow-hidden"
+              className="flex items-stretch divide-x divide-white/10 rounded-t-2xl overflow-hidden sm:mr-20 lg:mr-0"
               style={{ background: "rgba(0,0,0,0.52)", backdropFilter: "blur(12px)" }}
             >
               {stats.map((s) => (
-                <div key={s.label} className="flex-1 py-4 px-4 text-center">
+                <div key={s.label} className="flex-1 py-3 sm:py-4 px-2 sm:px-4 text-center">
                   <div
-                    className="text-amber-300 font-bold text-base md:text-lg"
+                    className="text-amber-300 font-bold text-sm sm:text-base md:text-lg"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {s.value}
                   </div>
-                  <div className="text-white/50 text-[0.65rem] mt-0.5 uppercase tracking-wide">
+                  <div className="text-white/50 text-[0.6rem] sm:text-[0.65rem] mt-0.5 uppercase tracking-wide whitespace-nowrap">
                     {s.label}
                   </div>
                 </div>
