@@ -17,10 +17,11 @@ export default function StorySection() {
 
   return (
     <section
-      id="about"
-      className="section-padding bg-white overflow-hidden"
+      id="story"
+      className="section-padding bg-white overflow-hidden relative"
       aria-labelledby="about-heading"
     >
+      <span id="about" className="sr-only" />
       <div className="container-tight">
         {/* Section header — centered top */}
         <motion.div

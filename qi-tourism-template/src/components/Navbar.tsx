@@ -10,17 +10,18 @@ import { siteConfig } from "@/config/site.config";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const navLinks = [
-  { label: "About", href: "#about" },
+  { label: "Our Story", href: "#story" },
   { label: "Gallery", href: "#gallery" },
   { label: "Amenities", href: "#amenities" },
   { label: "Rooms", href: "#rooms" },
-  { label: "Explore", href: "#attractions" },
+  { label: "Explore", href: "#explore" },
   { label: "Reviews", href: "#testimonials" },
   { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
 ];
 
 if (siteConfig.events.offersEvents) {
-  navLinks.splice(6, 0, { label: "Events", href: "#events" });
+  navLinks.splice(7, 0, { label: "Events", href: "#events" });
 }
 
 export default function Navbar() {
@@ -28,28 +29,46 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
 
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  // Robust scroll-spy tracking using viewport bounding coordinates
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setScrolled(scrollY > 50);
+      setScrolled(scrollY > 40);
 
-      if (scrollY < 120) {
+      // Hero section at the top
+      if (scrollY < 180) {
         setActiveSection("");
         return;
       }
 
-      const sectionIds = navLinks.map((l) => l.href.replace("#", "")).filter(Boolean);
-      const scrollPos = scrollY + 160;
+      // Reached bottom of page -> activate contact/footer
+      if (window.innerHeight + Math.ceil(scrollY) >= document.documentElement.scrollHeight - 60) {
+        setActiveSection("contact");
+        return;
+      }
 
+      const sectionIds = ["story", "gallery", "amenities", "rooms", "explore", "testimonials", "faq", "contact"];
+      const triggerLine = 220; // 220px below navbar
       let current = "";
+
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerLine) {
             current = id;
-            break;
           }
         }
       }
@@ -76,7 +95,7 @@ export default function Navbar() {
         {/* Logo / Brand */}
         <Link
           href="/"
-          className="flex items-center gap-3 text-decoration-none group"
+          className="flex items-center gap-2.5 sm:gap-3 text-decoration-none group min-w-0"
           aria-label={`${siteConfig.businessName} home`}
           onClick={(e) => {
             if (window.location.pathname === "/") {
@@ -101,7 +120,7 @@ export default function Navbar() {
           )}
           {siteConfig.logo?.showTextFallback && (
             <span
-              className={`font-heading text-lg sm:text-xl font-bold tracking-tight transition-colors duration-300 ${
+              className={`font-heading text-[1.05rem] xs:text-base sm:text-lg md:text-xl font-bold tracking-tight whitespace-nowrap truncate transition-colors duration-300 ${
                 scrolled ? "text-[var(--color-primary)]" : "text-white"
               }`}
               style={{ fontFamily: "var(--font-heading)" }}
@@ -112,7 +131,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav links */}
-        <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-7" aria-label="Main navigation">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
             return (
@@ -141,7 +160,7 @@ export default function Navbar() {
         </nav>
 
         {/* Header Actions (Desktop + Mobile) */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
           {/* Persistent Desktop "Book Now" CTA */}
           <Link
             href={waUrl}
@@ -168,17 +187,17 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — truly full height, covering full viewport beneath navbar */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden bg-[#FAF7F2] shadow-2xl border-t border-[var(--color-border)] overflow-hidden"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-x-0 top-[60px] bottom-0 h-[calc(100dvh-60px)] md:hidden bg-[#FAF7F2] shadow-2xl border-t border-[var(--color-border)] overflow-y-auto z-50 flex flex-col justify-between"
           >
-            <nav className="container-tight py-6 flex flex-col gap-2" aria-label="Mobile navigation">
+            <nav className="container-tight py-6 flex flex-col gap-2 flex-1" aria-label="Mobile navigation">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.replace("#", "");
                 return (
@@ -199,16 +218,18 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-              <Link
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary mt-4 py-4 justify-center text-base font-semibold shadow-lg"
-                onClick={() => setMobileOpen(false)}
-              >
-                <WhatsAppIcon className="w-5 h-5" />
-                Book via WhatsApp
-              </Link>
+              <div className="pt-3 pb-6">
+                <Link
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full py-4 justify-center text-base font-semibold shadow-lg"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <WhatsAppIcon className="w-5 h-5" />
+                  Book via WhatsApp
+                </Link>
+              </div>
             </nav>
           </motion.div>
         )}

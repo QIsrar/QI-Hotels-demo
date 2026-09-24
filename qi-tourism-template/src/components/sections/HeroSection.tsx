@@ -61,7 +61,7 @@ export default function HeroSection() {
 
         {/* Main content — vertically centered, fits neatly on 1080p above stats bar */}
         <div className="flex-1 flex items-center">
-          <div className="container-tight w-full pt-24 pb-6 sm:pt-28 sm:pb-8">
+          <div className="container-tight w-full pt-20 pb-4 sm:pt-24 sm:pb-5">
             <div className="max-w-2xl">
 
               {/* Google Rating Badge */}
@@ -161,20 +161,20 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ── Stats bar — sits naturally at the very bottom ── */}
+        {/* ── Stats bar — sits naturally with clear space above bottom edge ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
           className="w-full relative z-10"
         >
-          <div className="container-tight pb-0">
+          <div className="container-tight pb-6 sm:pb-8">
             <div
-              className="flex items-stretch divide-x divide-white/10 rounded-t-2xl overflow-hidden sm:mr-20 lg:mr-0"
+              className="flex items-stretch divide-x divide-white/10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 sm:mr-20 lg:mr-0"
               style={{ background: "rgba(0,0,0,0.52)", backdropFilter: "blur(12px)" }}
             >
               {stats.map((s) => (
-                <div key={s.label} className="flex-1 py-3 sm:py-4 px-2 sm:px-4 text-center">
+                <div key={s.label} className="flex-1 py-3 sm:py-3.5 px-2 sm:px-4 text-center">
                   <div
                     className="text-amber-300 font-bold text-sm sm:text-base md:text-lg"
                     style={{ fontFamily: "var(--font-heading)" }}

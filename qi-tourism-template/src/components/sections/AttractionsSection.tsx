@@ -18,10 +18,11 @@ const cardVariants = {
 export default function AttractionsSection() {
   return (
     <section
-      id="attractions"
-      className="section-padding bg-white"
+      id="explore"
+      className="section-padding bg-white relative"
       aria-labelledby="attractions-heading"
     >
+      <span id="attractions" className="sr-only" />
       <div className="container-tight">
         {/* Header */}
         <motion.div
