@@ -170,18 +170,18 @@ export default function HeroSection() {
         >
           <div className="container-tight pb-6 sm:pb-8">
             <div
-              className="flex items-stretch divide-x divide-white/10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 sm:mr-20 lg:mr-0"
-              style={{ background: "rgba(0,0,0,0.52)", backdropFilter: "blur(12px)" }}
+              className="flex items-stretch divide-x divide-white/20 rounded-2xl overflow-hidden shadow-2xl border border-white/25 sm:mr-20 lg:mr-0"
+              style={{ background: "rgba(10, 18, 26, 0.85)", backdropFilter: "blur(16px)" }}
             >
               {stats.map((s) => (
-                <div key={s.label} className="flex-1 py-3 sm:py-3.5 px-2 sm:px-4 text-center">
+                <div key={s.label} className="flex-1 py-3.5 sm:py-4 px-2 sm:px-4 text-center">
                   <div
-                    className="text-amber-300 font-bold text-sm sm:text-base md:text-lg"
+                    className="text-[#FFD166] font-extrabold text-base sm:text-lg md:text-xl drop-shadow-md"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {s.value}
                   </div>
-                  <div className="text-white/50 text-[0.6rem] sm:text-[0.65rem] mt-0.5 uppercase tracking-wide whitespace-nowrap">
+                  <div className="text-white/90 font-medium text-[0.65rem] sm:text-[0.72rem] mt-0.5 uppercase tracking-wider whitespace-nowrap">
                     {s.label}
                   </div>
                 </div>

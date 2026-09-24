@@ -95,7 +95,7 @@ export default function Navbar() {
         {/* Logo / Brand */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3 text-decoration-none group min-w-0"
+          className="flex items-center gap-2 sm:gap-3 text-decoration-none group flex-shrink-0"
           aria-label={`${siteConfig.businessName} home`}
           onClick={(e) => {
             if (window.location.pathname === "/") {
@@ -107,7 +107,7 @@ export default function Navbar() {
           }}
         >
           {siteConfig.logo?.path && (
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative w-7 h-7 sm:w-9 sm:h-9 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src={siteConfig.logo.path}
                 alt={siteConfig.logo.alt}
@@ -120,7 +120,7 @@ export default function Navbar() {
           )}
           {siteConfig.logo?.showTextFallback && (
             <span
-              className={`font-heading text-[1.05rem] xs:text-base sm:text-lg md:text-xl font-bold tracking-tight whitespace-nowrap truncate transition-colors duration-300 ${
+              className={`font-heading text-[0.88rem] xs:text-[1rem] sm:text-lg md:text-xl font-bold tracking-tight whitespace-nowrap transition-colors duration-300 ${
                 scrolled ? "text-[var(--color-primary)]" : "text-white"
               }`}
               style={{ fontFamily: "var(--font-heading)" }}
@@ -193,8 +193,8 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            exit={{ opacity: 0, transition: { duration: 0 } }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed inset-x-0 top-[60px] bottom-0 h-[calc(100dvh-60px)] md:hidden bg-[#FAF7F2] shadow-2xl border-t border-[var(--color-border)] overflow-y-auto z-50 flex flex-col justify-between"
           >
             <nav className="container-tight py-6 flex flex-col gap-2 flex-1" aria-label="Mobile navigation">
