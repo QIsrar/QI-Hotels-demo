@@ -135,12 +135,18 @@ async function frameMobile(srcFilename, outFilename) {
 
 async function run() {
   console.log('Generating device-framed mockups from live production screenshots...');
-  await frameDesktop('hero_desktop_1790236318970.png', 'preview-hero.png', 'qi-hotels.vercel.app');
-  await frameDesktop('rooms_desktop_1790236651239.png', 'preview-rooms.png', 'qi-hotels.vercel.app/#rooms');
-  await frameDesktop('gallery_lightbox_desktop_1790236501278.png', 'preview-gallery.png', 'qi-hotels.vercel.app/#gallery');
-  await frameDesktop('booking_wizard_desktop_1790237624155.png', 'preview-booking.png', 'qi-hotels.vercel.app/?booking=open');
-  await frameDesktop('footer_desktop_1790238454969.png', 'preview-footer.png', 'qi-hotels.vercel.app/#contact');
-  await frameMobile('hero_mobile_1790238790998.png', 'preview-mobile.png');
+  const findFile = (prefix, fallback) => {
+    const files = fs.readdirSync(srcDir);
+    const match = files.find(f => f.startsWith(prefix) && f.endsWith('.png'));
+    return match || fallback;
+  };
+
+  await frameDesktop(findFile('hero_desktop', 'hero_desktop.png'), 'preview-hero.png', 'qi-hotels.vercel.app');
+  await frameDesktop(findFile('rooms_desktop', 'rooms_desktop.png'), 'preview-rooms.png', 'qi-hotels.vercel.app/#rooms');
+  await frameDesktop(findFile('gallery_lightbox', 'gallery_lightbox_desktop.png'), 'preview-gallery.png', 'qi-hotels.vercel.app/#gallery');
+  await frameDesktop(findFile('booking_wizard', 'booking_wizard_desktop.png'), 'preview-booking.png', 'qi-hotels.vercel.app/?booking=open');
+  await frameDesktop(findFile('footer_desktop', 'footer_desktop.png'), 'preview-footer.png', 'qi-hotels.vercel.app/#contact');
+  await frameMobile(findFile('hero_mobile', 'hero_mobile.png'), 'preview-mobile.png');
   console.log('Done!');
 }
 
