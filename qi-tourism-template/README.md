@@ -34,7 +34,7 @@
 </p>
 
 <p align="center">
-  <a href="../docs/demo-video.mp4">▶️ <strong>Watch the full 60-second walkthrough (1080p)</strong></a> &bull; Direct high-res MP4 download (10.3 MB)
+  <a href="../docs/demo-video.mp4">▶️ <strong>Watch the full 60-second walkthrough (1080p)</strong></a> &bull; Direct high-res MP4 download (25 MB)
 </p>
 
 ---
