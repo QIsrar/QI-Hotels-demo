@@ -17,6 +17,26 @@
   <img src="https://img.shields.io/badge/WhatsApp_API-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp API" />
 </p>
 
+<p align="center">
+  <a href="docs/demo-video.mp4" title="Watch full 1080p Walkthrough Video">
+    <img src="docs/demo-preview.gif" alt="Pine Crest Retreat 60-Second Walkthrough" width="880" style="border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.18);" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="docs/demo-video.mp4">
+    <img src="https://img.shields.io/badge/▶️_Watch_the_full_60--second_walkthrough-(1080p_MP4)-2D5016?style=for-the-badge&logoColor=white" alt="Watch Full Walkthrough" />
+  </a>
+  &nbsp;
+  <a href="https://qi-hotels.vercel.app">
+    <img src="https://img.shields.io/badge/🌐_Visit_Live_Deployment-qi--hotels.vercel.app-C5A880?style=for-the-badge&logoColor=white" alt="Visit Live Site" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="docs/demo-video.mp4">▶️ <strong>Watch the full 60-second walkthrough (1080p)</strong></a> &bull; Direct high-res MP4 download (10.3 MB)
+</p>
+
 ---
 
 ## 🚀 Live Demo
@@ -174,6 +194,27 @@ qi-tourism-template/
 │       └── whatsapp.ts      # Deep-link payload formatting and URL builder
 └── next.config.ts           # Next.js runtime image optimization settings
 ```
+
+---
+
+## 📸 Preview
+
+Device-framed visual captures from the [live production deployment](https://qi-hotels.vercel.app), showcasing key guest touchpoints, interactive workflows, and responsive views:
+
+| Desktop Landing & Hero | WhatsApp Booking Flow |
+| :---: | :---: |
+| <img src="docs/preview-hero.png" alt="Desktop Landing & Hero" width="450" /> | <img src="docs/preview-booking.png" alt="WhatsApp Booking Flow" width="450" /> |
+| **Desktop Landing & Hero**<br />*Floating glass availability search card over full-bleed hero banner* | **WhatsApp Booking Flow**<br />*2-step modal calculating nights, room tier, live pricing, and WhatsApp payload* |
+
+| Accommodation Showcase | High-Res Photography Lightbox |
+| :---: | :---: |
+| <img src="docs/preview-rooms.png" alt="Accommodation Showcase" width="450" /> | <img src="docs/preview-gallery.png" alt="High-Res Photography Lightbox" width="450" /> |
+| **Accommodation Showcase**<br />*Categorized suite cards with amenity badges, price tags, and date sync* | **High-Res Photography Lightbox**<br />*Full-screen gallery with category filtering, slide counter, and keyboard navigation* |
+
+| Mobile Responsive View | Footer & Newsletter |
+| :---: | :---: |
+| <img src="docs/preview-mobile.png" alt="Mobile Responsive View" width="280" /> | <img src="docs/preview-footer.png" alt="Footer & Newsletter" width="450" /> |
+| **Mobile Responsive View**<br />*Pixel-perfect 375px mobile viewport with touch drawer and quick WhatsApp CTA* | **Footer & Newsletter**<br />*Deep-tone brand gradient footer with inline non-blocking subscription status* |
 
 ---
 
