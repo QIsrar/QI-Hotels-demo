@@ -91,7 +91,7 @@ function AccommodationSectionContent() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14"
+            className="text-center mb-16 md:mb-20"
           >
             <p className="section-label mb-3">Our Rooms</p>
             <h2 id="rooms-heading" className="section-heading mb-4">
@@ -122,17 +122,17 @@ function AccommodationSectionContent() {
                 >
                   {/* Featured badge */}
                   {room.featured && !isNotSuitable && (
-                    <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 bg-[var(--color-accent)] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                      <Star className="w-3 h-3 fill-white" />
-                      Most Popular
+                    <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 bg-[var(--color-accent)] text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                      <Star className="w-3.5 h-3.5 fill-white flex-shrink-0" />
+                      <span>Most Popular</span>
                     </div>
                   )}
 
                   {/* Guest capacity badge */}
-                  <div className={`absolute top-4 ${room.featured && !isNotSuitable ? "right-4" : "left-4"} z-10 flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg ${
+                  <div className={`absolute top-4 ${room.featured && !isNotSuitable ? "right-4" : "left-4"} z-10 flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg whitespace-nowrap ${
                     isNotSuitable
                       ? "bg-gray-800 text-white"
-                      : "bg-white/90 backdrop-blur-sm text-gray-700 border border-gray-200/80"
+                      : "bg-white/95 backdrop-blur-sm text-gray-700 border border-gray-200/80"
                   }`}>
                     {isNotSuitable ? `Max ${room.maxGuests} Guests` : `Up to ${room.maxGuests} Guests`}
                   </div>
@@ -162,11 +162,13 @@ function AccommodationSectionContent() {
                     />
                     {/* Price overlay on image */}
                     <div className="absolute bottom-3 right-3">
-                      <div className="bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-xl">
+                      <div className="bg-black/70 backdrop-blur-sm text-white px-3.5 py-1.5 rounded-xl flex items-baseline">
                         <span className="font-bold text-base" style={{ fontFamily: "var(--font-heading)" }}>
                           {room.price}
                         </span>
-                        <span className="text-white/70 text-xs ml-1">{room.priceNote}</span>
+                        <span className="text-white/80 text-xs ml-1.5 font-normal">
+                          {" "}/ {room.priceNote}
+                        </span>
                       </div>
                     </div>
                   </div>

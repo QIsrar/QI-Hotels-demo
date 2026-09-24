@@ -213,7 +213,7 @@ export const siteConfig = {
       description:
         "A serene forest village with some of the most beautiful walking trails in KPK. Famous for its rhododendron blooms in spring and snowfall in winter.",
       travelTime: "40 mins away",
-      imagePath: "/images/attraction-nathia.jpg",
+      imagePath: "/images/attraction-dunga.jpg",
       altText: "Peaceful forest village of Dunga Gali with mountain trails",
     },
   ],

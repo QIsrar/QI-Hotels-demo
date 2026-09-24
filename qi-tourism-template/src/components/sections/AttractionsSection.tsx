@@ -29,7 +29,7 @@ export default function AttractionsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-16 md:mb-20"
         >
           <p className="section-label mb-3">Explore the Region</p>
           <h2 id="attractions-heading" className="section-heading mb-4">
@@ -58,10 +58,10 @@ export default function AttractionsSection() {
               <motion.article
                 key={attraction.name}
                 variants={cardVariants}
-                className="group flex flex-col rounded-xl overflow-hidden bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col rounded-2xl overflow-hidden bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                {/* Image with name overlay */}
-                <div className="relative h-52 overflow-hidden flex-shrink-0">
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <Image
                     src={attraction.imagePath}
                     alt={attraction.altText}
@@ -70,66 +70,53 @@ export default function AttractionsSection() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
-                  {/* Full gradient for readability */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.72) 100%)",
-                    }}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
 
                   {/* Travel time — top left */}
                   <div className="absolute top-3 left-3 z-10">
-                    <span className="inline-flex items-center gap-1.5 text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/20"
-                      style={{ background: "rgba(0,0,0,0.52)", backdropFilter: "blur(6px)" }}>
+                    <span
+                      className="inline-flex items-center gap-1.5 text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/20"
+                      style={{ background: "rgba(0,0,0,0.65)", backdropFilter: "blur(6px)" }}
+                    >
                       <Clock className="w-3 h-3 text-amber-300" />
                       {attraction.travelTime}
                     </span>
                   </div>
-
-                  {/* Place name — bottom of image, always visible */}
-                  <div className="absolute bottom-0 left-0 right-0 z-10 px-4 pb-4">
-                    <h3
-                      className="text-white font-bold text-base leading-tight"
-                      style={{
-                        fontFamily: "var(--font-heading)",
-                        textShadow: "0 1px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)",
-                        color: "#fff"
-                      }}
-                    >
-                      {attraction.name}
-                    </h3>
-                  </div>
                 </div>
 
                 {/* Card body */}
-                <div className="p-4 flex flex-col flex-1">
-                  <p className="text-sm text-gray-500 leading-relaxed flex-1 mb-4">
+                <div className="p-5 flex flex-col flex-1">
+                  <h3
+                    className="text-gray-900 font-bold text-lg leading-snug mb-2 font-heading"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {attraction.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-5">
                     {attraction.description}
                   </p>
 
                   {/* Explore links */}
-                  <div className="flex flex-col sm:flex-row items-stretch gap-3 pt-4 border-t border-gray-100 mt-2">
+                  <div className="flex items-center gap-2.5 pt-4 border-t border-gray-100 mt-auto">
                     <a
                       href={googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 text-base font-semibold rounded-xl py-3.5 transition-all duration-200 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold rounded-xl py-3 transition-all duration-200 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5"
                       style={{ background: "var(--color-primary)" }}
                       aria-label={`View ${attraction.name} on Google Maps`}
                     >
-                      <MapPin className="w-4 h-4" />
+                      <MapPin className="w-3.5 h-3.5" />
                       Maps
                     </a>
                     <a
                       href={googleSearchUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 text-base font-semibold rounded-xl py-3.5 border-2 border-gray-200 text-gray-700 bg-white transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-gray-50 hover:-translate-y-0.5"
+                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold rounded-xl py-3 border-2 border-gray-200 text-gray-700 bg-white transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-gray-50 hover:-translate-y-0.5"
                       aria-label={`Search ${attraction.name} on Google`}
                     >
-                      <Search className="w-4 h-4" />
+                      <Search className="w-3.5 h-3.5" />
                       Search
                     </a>
                   </div>

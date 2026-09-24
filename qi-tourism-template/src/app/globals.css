@@ -48,48 +48,47 @@
 }
 
 /* ── Base Reset & Defaults ───────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-[role="button"],
-button,
-a,
-select,
-input[type="submit"],
-input[type="button"],
-.clickable {
-  cursor: pointer;
-}
+  [role="button"],
+  button,
+  a,
+  select,
+  input[type="submit"],
+  input[type="button"],
+  .clickable {
+    cursor: pointer;
+  }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-body {
-  font-family: var(--font-body);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.7;
-  overflow-x: hidden;
-}
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-/* ── Typography ──────────────────────────────────────────── */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  line-height: 1.2;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+  }
 }
 
 /* ── Custom Scrollbar ────────────────────────────────────── */
@@ -171,7 +170,10 @@ h6 {
 .section-subheading {
   font-size: 1.125rem;
   color: var(--color-text-muted);
-  max-width: 600px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   line-height: 1.7;
 }
 
@@ -212,10 +214,10 @@ h6 {
 
 /* ── Glassmorphism Navbar ────────────────────────────────── */
 .glass-nav {
-  background: rgba(250, 247, 242, 0.85);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border-bottom: 1px solid rgba(200, 144, 42, 0.15);
+  background: rgba(250, 247, 242, 0.97);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(200, 144, 42, 0.20);
 }
 
 /* ── Button Styles ───────────────────────────────────────── */
@@ -316,6 +318,9 @@ textarea.wizard-input {
 .divider-accent {
   width: 60px;
   height: 3px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   background: linear-gradient(to right, var(--color-accent), var(--color-accent-light));
   border-radius: 2px;
 }

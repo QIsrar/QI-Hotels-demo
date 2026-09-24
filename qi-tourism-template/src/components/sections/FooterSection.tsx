@@ -80,7 +80,7 @@ export default function FooterSection() {
 
       {/* ── CTA Band with Seamless Gradient Transition into Dark Footer ── */}
       <div
-        className="relative overflow-hidden py-16 sm:py-20"
+        className="relative overflow-hidden py-20 sm:py-24"
         style={{
           background: "linear-gradient(180deg, var(--color-primary) 0%, #1e3810 50%, #15250d 80%, #111a0c 100%)",
         }}
@@ -122,7 +122,7 @@ export default function FooterSection() {
 
       {/* ── Main Footer Body (Balanced 12-Column Grid) ─────────── */}
       <div className="bg-[#111a0c]">
-        <div className="container-tight py-16">
+        <div className="container-tight pt-20 pb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
 
             {/* Col 1: Brand (4 cols) */}
@@ -229,11 +229,11 @@ export default function FooterSection() {
               </ul>
 
               {/* Newsletter Signup (Inline, non-blocking confirmation) */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-5 border-t border-white/10 mt-6">
                 <h4 className="text-white/80 text-[0.7rem] font-semibold uppercase tracking-wider mb-2">
                   Stay Updated
                 </h4>
-                <p className="text-white/40 text-xs mb-3">
+                <p className="text-white/60 text-xs mb-3.5 leading-relaxed">
                   Get seasonal retreat deals and mountain weather alerts.
                 </p>
                 <AnimatePresence mode="wait">
@@ -244,7 +244,7 @@ export default function FooterSection() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -3 }}
                       transition={{ duration: 0.2 }}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-medium"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-medium"
                     >
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                       <span>Thanks — you&apos;re on the list!</span>
@@ -256,7 +256,7 @@ export default function FooterSection() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       onSubmit={handleNewsletterSubmit}
-                      className="flex flex-col gap-1.5"
+                      className="flex flex-col gap-2"
                     >
                       <div className="flex items-center gap-2">
                         <input
@@ -269,11 +269,11 @@ export default function FooterSection() {
                           placeholder="Your email address"
                           required
                           aria-label="Email address for newsletter"
-                          className="w-full h-9 px-3 bg-white/5 border border-white/15 rounded-lg text-xs text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] transition-all"
+                          className="flex-1 min-w-0 h-10 px-3.5 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] transition-all"
                         />
                         <button
                           type="submit"
-                          className="h-9 px-3.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)] text-white text-xs font-semibold rounded-lg transition-colors whitespace-nowrap shadow cursor-pointer"
+                          className="flex-shrink-0 h-10 px-5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-light)] text-white text-xs font-bold rounded-xl transition-colors whitespace-nowrap shadow-md cursor-pointer"
                         >
                           Join
                         </button>
@@ -344,8 +344,7 @@ export default function FooterSection() {
                   }}
                   aria-label="Visit QI Tyrix agency website"
                 >
-                  Developed by{" "}
-                  <span className="font-bold ml-1 text-amber-300">QI Tyrix</span>
+                  Developed by&nbsp;<span className="font-bold text-amber-300">QI Tyrix</span>
                 </a>
               </div>
             )}

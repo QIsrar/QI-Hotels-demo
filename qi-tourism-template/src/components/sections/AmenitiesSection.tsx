@@ -40,7 +40,7 @@ export default function AmenitiesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-16 md:mb-20"
         >
           <p className="section-label mb-3">What We Offer</p>
           <h2 id="amenities-heading" className="section-heading mb-4">

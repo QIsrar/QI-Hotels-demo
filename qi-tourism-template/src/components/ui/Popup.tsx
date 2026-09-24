@@ -13,36 +13,34 @@ export default function Popup() {
 
   const close = useCallback(() => {
     setIsOpen(false);
+    try {
+      sessionStorage.setItem("qi_popup_shown", "1");
+    } catch {
+      // sessionStorage unavailable
+    }
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (sessionStorage.getItem("qi_popup_shown")) return;
+    try {
+      if (sessionStorage.getItem("qi_popup_shown")) return;
+    } catch {
+      // sessionStorage unavailable
+    }
 
-    const triggerPopup = () => {
-      setIsOpen(true);
-      sessionStorage.setItem("qi_popup_shown", "1");
-    };
-
-    // 1. Time-based trigger: 8 seconds
-    const timer = setTimeout(triggerPopup, 8000);
-
-    // 2. Scroll-depth trigger: 35% of page height
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight > 0 && window.scrollY / scrollHeight > 0.35) {
-        triggerPopup();
-        window.removeEventListener("scroll", handleScroll);
-        clearTimeout(timer);
+    // Show once per session with 5s initial delay
+    const timer = setTimeout(() => {
+      try {
+        if (!sessionStorage.getItem("qi_popup_shown")) {
+          setIsOpen(true);
+          sessionStorage.setItem("qi_popup_shown", "1");
+        }
+      } catch {
+        setIsOpen(true);
       }
-    };
+    }, 5000);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Escape key to dismiss

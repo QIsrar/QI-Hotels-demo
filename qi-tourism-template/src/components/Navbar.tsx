@@ -29,47 +29,47 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 50);
-      if (window.scrollY < 100) {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 50);
+
+      if (scrollY < 120) {
         setActiveSection("");
+        return;
+      }
+
+      const sectionIds = navLinks.map((l) => l.href.replace("#", "")).filter(Boolean);
+      const scrollPos = scrollY + 160;
+
+      let current = "";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            current = id;
+            break;
+          }
+        }
+      }
+
+      if (current) {
+        setActiveSection(current);
       }
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
-  useEffect(() => {
-    const sectionIds = navLinks.map((l) => l.href.replace("#", "")).filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-90px 0px -55% 0px",
-        threshold: 0,
-      }
-    );
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const waUrl = buildWhatsAppUrl();
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-400 ${
-        scrolled ? "glass-nav py-3 shadow-sm" : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled ? "bg-[#FAF7F2]/95 backdrop-blur-md py-3 shadow-md border-b border-[var(--color-border)]" : "bg-transparent py-5"
       }`}
     >
       <div className="container-tight flex items-center justify-between">
@@ -176,9 +176,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden glass-nav border-t border-[var(--color-border)] overflow-hidden"
+            className="md:hidden bg-[#FAF7F2] shadow-2xl border-t border-[var(--color-border)] overflow-hidden"
           >
-            <nav className="container-tight py-4 flex flex-col gap-1" aria-label="Mobile navigation">
+            <nav className="container-tight py-6 flex flex-col gap-2" aria-label="Mobile navigation">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.replace("#", "");
                 return (
@@ -186,7 +186,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`font-medium py-3 px-3 rounded-lg transition-colors flex items-center justify-between ${
+                    className={`font-medium py-3.5 px-4 rounded-xl text-base transition-colors flex items-center justify-between ${
                       isActive
                         ? "bg-[var(--color-accent)]/15 text-[var(--color-accent-dark)] font-bold border-l-4 border-[var(--color-accent)]"
                         : "text-[var(--color-text)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)]"
@@ -194,7 +194,7 @@ export default function Navbar() {
                   >
                     <span>{link.label}</span>
                     {isActive && (
-                      <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]" />
                     )}
                   </Link>
                 );
@@ -203,10 +203,10 @@ export default function Navbar() {
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary mt-3 justify-center"
+                className="btn-primary mt-4 py-4 justify-center text-base font-semibold shadow-lg"
                 onClick={() => setMobileOpen(false)}
               >
-                <WhatsAppIcon className="w-4 h-4" />
+                <WhatsAppIcon className="w-5 h-5" />
                 Book via WhatsApp
               </Link>
             </nav>

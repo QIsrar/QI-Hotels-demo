@@ -377,7 +377,7 @@ function BookingWizardModal({
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.2 }}
                       onSubmit={handleNext}
-                      className="space-y-6"
+                      className="flex flex-col gap-6"
                     >
                       {/* Check-in */}
                       <InputField id="booking-checkin" label="Check-in Date" icon={CalendarDays}>
@@ -459,12 +459,14 @@ function BookingWizardModal({
                         </motion.div>
                       )}
 
-                      <button
-                        type="submit"
-                        className="w-full btn-primary py-3.5 text-base font-semibold"
-                      >
-                        Continue →
-                      </button>
+                      <div className="pt-3">
+                        <button
+                          type="submit"
+                          className="w-full btn-primary py-4 text-base font-semibold shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                        >
+                          Continue →
+                        </button>
+                      </div>
                     </motion.form>
                   )}
 
@@ -476,7 +478,7 @@ function BookingWizardModal({
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.2 }}
                       onSubmit={handleSubmit}
-                      className="space-y-6"
+                      className="flex flex-col gap-6"
                     >
                       {/* Booking summary recap */}
                       <div className="bg-gray-50 rounded-xl px-4 py-3 flex items-center justify-between text-sm border border-gray-200">
@@ -554,11 +556,11 @@ function BookingWizardModal({
                         />
                       </InputField>
 
-                      <div className="flex gap-3">
+                      <div className="flex gap-3 pt-3">
                         <button
                           type="button"
                           onClick={() => setStep(1)}
-                          className="btn-outline py-3.5 px-5 flex items-center justify-center gap-1.5 flex-shrink-0"
+                          className="btn-outline py-4 px-6 flex items-center justify-center gap-1.5 flex-shrink-0 cursor-pointer"
                           aria-label="Go back"
                         >
                           <ArrowLeft className="w-4 h-4" />
@@ -566,7 +568,7 @@ function BookingWizardModal({
                         </button>
                         <button
                           type="submit"
-                          className="flex-1 btn-primary py-3.5 flex justify-center items-center gap-2 text-base font-semibold"
+                          className="flex-1 btn-primary py-4 flex justify-center items-center gap-2 text-base font-semibold shadow-lg hover:shadow-xl transition-all cursor-pointer"
                         >
                           <WhatsAppIcon className="w-5 h-5" />
                           Request to Book

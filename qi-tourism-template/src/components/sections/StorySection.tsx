@@ -28,7 +28,7 @@ export default function StorySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 md:mb-20"
         >
           <p className="section-label mb-3">{story.subheading}</p>
           <h2

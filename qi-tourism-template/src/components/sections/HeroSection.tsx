@@ -59,9 +59,9 @@ export default function HeroSection() {
       {/* ── All content in a flex column: grows to fill viewport ── */}
       <div className="relative z-10 flex flex-col" style={{ minHeight: "100svh" }}>
 
-        {/* Main content — vertically centered, takes all available space above stats bar */}
+        {/* Main content — vertically centered, fits neatly on 1080p above stats bar */}
         <div className="flex-1 flex items-center">
-          <div className="container-tight w-full py-32">
+          <div className="container-tight w-full pt-24 pb-6 sm:pt-28 sm:pb-8">
             <div className="max-w-2xl">
 
               {/* Google Rating Badge */}
@@ -89,10 +89,10 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-                className="text-white font-bold mb-5 leading-tight"
+                className="text-white font-bold mb-4 leading-tight"
                 style={{
                   fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(2.4rem, 4.5vw, 3.75rem)",
+                  fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
                   letterSpacing: "-0.01em",
                   textShadow: "0 2px 12px rgba(0,0,0,0.6)",
                   color: "#fff"
@@ -106,7 +106,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.42 }}
-                className="text-white/85 text-base md:text-lg leading-relaxed mb-8 max-w-lg"
+                className="text-white/85 text-base md:text-lg leading-relaxed mb-7 max-w-lg"
                 style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}
               >
                 {siteConfig.description}
@@ -117,7 +117,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.55 }}
-                className="flex flex-wrap items-center gap-4 mb-8"
+                className="flex flex-wrap items-center gap-4 mb-6"
               >
                 <Link
                   href={waUrl}
@@ -142,10 +142,10 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.72, duration: 0.5 }}
-                className="flex items-center gap-2 mb-8"
+                className="flex items-center gap-2 mb-6"
               >
                 <MapPin className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
-                <span className="text-white/55 text-xs">{siteConfig.contact.address}</span>
+                <span className="text-white/70 text-xs sm:text-sm font-medium">{siteConfig.contact.address}</span>
               </motion.div>
             </div>
             
@@ -154,6 +154,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
+              className="mt-3"
             >
               <AvailabilitySearch />
             </motion.div>
